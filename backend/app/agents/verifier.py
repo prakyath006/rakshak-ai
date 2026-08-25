@@ -9,43 +9,52 @@ from datetime import datetime
 
 
 class VerificationResult:
-    """Structured verification report."""
+    """Structured 4-dimensional verification report."""
 
     def __init__(
         self,
         completeness_score: float,
+        reliability_score: float,
         consistency_score: float,
-        evidence_strength: str,
+        relevance_score: float,
+        evidence_strength: str,  # HIGH, MEDIUM, LOW (derived)
         available_evidence: List[str],
         missing_critical: List[str],
         missing_optional: List[str],
         contradictions: List[str],
+        relevance_warnings: List[str],
         summary_by_type: Dict[str, str],
     ):
         self.completeness_score = round(completeness_score, 3)
+        self.reliability_score = round(reliability_score, 3)
         self.consistency_score = round(consistency_score, 3)
+        self.relevance_score = round(relevance_score, 3)
         self.evidence_strength = evidence_strength
         self.available_evidence = available_evidence
         self.missing_critical = missing_critical
         self.missing_optional = missing_optional
         self.contradictions = contradictions
+        self.relevance_warnings = relevance_warnings
         self.summary_by_type = summary_by_type
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "completeness_score": self.completeness_score,
+            "reliability_score": self.reliability_score,
             "consistency_score": self.consistency_score,
+            "relevance_score": self.relevance_score,
             "evidence_strength": self.evidence_strength,
             "available_evidence": self.available_evidence,
             "missing_critical": self.missing_critical,
             "missing_optional": self.missing_optional,
             "contradictions": self.contradictions,
+            "relevance_warnings": self.relevance_warnings,
             "summary_by_type": self.summary_by_type,
         }
 
 
 class EvidenceValidator:
-    """Validates evidence against policy requirements, consistency rules, and contradiction checks."""
+    """Validates evidence across Completeness, Reliability, Consistency, and Relevance."""
 
     def verify(
         self,
@@ -56,11 +65,57 @@ class EvidenceValidator:
         nodes = evidence_graph.get("nodes", [])
         required_list = policy.get("required_evidence", [])
 
-        # Map available types
-        available_types = set(node["type"] for node in nodes)
-        nodes_by_type = {node["type"]: node for node in nodes}
+        # Base dispute metadata
+        dispute_info = dispute_data.get("dispute", {})
+        dispute_amt = float(dispute_info.get("amount", 0.0))
+        target_order_id = dispute_data.get("order", {}).get("order_id", "")
+        target_payment_id = dispute_data.get("payment", {}).get("payment_id", "")
 
-        # 1. Completeness Check
+        # -------------------------------------------------------------
+        # 1. RELEVANCE & ADVERSARIAL TRAP VALIDATION
+        # -------------------------------------------------------------
+        relevance_warnings: List[str] = []
+        valid_nodes: List[Dict[str, Any]] = []
+
+        for node in nodes:
+            is_relevant = True
+            source_rec = str(node.get("source_record_id", ""))
+            content = node.get("content", {})
+
+            # Trap A: Cross-order / cross-payment contamination
+            # If evidence has an explicit order_id or source_record_id that conflicts with disputed order
+            node_order_id = content.get("order_id")
+            if node_order_id and node_order_id != target_order_id:
+                relevance_warnings.append(
+                    f"Contaminated Evidence: {node['evidence_id']} belongs to order {node_order_id}, but dispute is for {target_order_id}."
+                )
+                is_relevant = False
+
+            # Trap B: Amount Discrepancy (e.g. ₹5,000 invoice attached to ₹50,000 dispute)
+            node_amt = content.get("amount") or content.get("order_amount") or content.get("invoice_amount")
+            if node_amt is not None and dispute_amt > 0:
+                node_amt_float = float(node_amt)
+                if abs(node_amt_float - dispute_amt) / dispute_amt > 0.10:  # >10% mismatch
+                    relevance_warnings.append(
+                        f"Amount Mismatch: Evidence {node['evidence_id']} is for ₹{node_amt_float:,.2f}, but dispute amount is ₹{dispute_amt:,.2f}."
+                    )
+                    # For invoice / billing proof, severe mismatch degrades relevance
+                    if node["type"] in ["INVOICE", "PAYMENT_RECORD", "ORDER_RECORD"]:
+                        is_relevant = False
+
+            if is_relevant:
+                valid_nodes.append(node)
+
+        # Relevance Score calculation
+        total_nodes = len(nodes)
+        relevance_score = (len(valid_nodes) / total_nodes) if total_nodes > 0 else 1.0
+
+        # Map available types strictly from valid/relevant nodes
+        available_types = set(node["type"] for node in valid_nodes)
+
+        # -------------------------------------------------------------
+        # 2. COMPLETENESS CHECK
+        # -------------------------------------------------------------
         total_weight = 0.0
         acquired_weight = 0.0
         missing_critical: List[str] = []
@@ -87,7 +142,18 @@ class EvidenceValidator:
             acquired_weight / total_weight if total_weight > 0 else 0.0
         )
 
-        # 2. Consistency & Contradiction Detection
+        # -------------------------------------------------------------
+        # 3. RELIABILITY CHECK (Source credibility weighting)
+        # -------------------------------------------------------------
+        if valid_nodes:
+            total_reliability = sum(node.get("reliability", 0.8) for node in valid_nodes)
+            reliability_score = total_reliability / len(valid_nodes)
+        else:
+            reliability_score = 0.0
+
+        # -------------------------------------------------------------
+        # 4. CONSISTENCY & CONTRADICTION DETECTION
+        # -------------------------------------------------------------
         contradictions: List[str] = []
         consistency_deductions = 0.0
 
@@ -109,18 +175,14 @@ class EvidenceValidator:
                 )
                 consistency_deductions += 0.25
 
-        # Rule C: Customer Communication acknowledgement vs denial
+        # Rule C: Customer Communication acknowledgment vs merchant admission of loss
         comms = dispute_data.get("communications", [])
         for comm in comms:
             msg_lower = comm.get("message", "").lower()
-            if "received" in msg_lower and "thanks" in msg_lower:
-                # Customer acknowledged receipt
-                pass
-            elif "lost" in msg_lower and comm.get("direction") == "outbound":
+            if "lost" in msg_lower and comm.get("direction") == "outbound":
                 contradictions.append("Merchant confirmed package lost in outbound email to customer.")
                 consistency_deductions += 0.50
             elif "will process your refund" in msg_lower or "will refund" in msg_lower:
-                # Refund promised in writing
                 refunds = dispute_data.get("refunds", [])
                 if not refunds or all(r.get("status") != "processed" for r in refunds):
                     contradictions.append(
@@ -133,7 +195,6 @@ class EvidenceValidator:
         cancelled_at = order_data.get("cancelled_at")
         if cancelled_at:
             if not shipment_data:
-                # Order cancelled, no shipment ever created, no refund ever initiated
                 refunds = dispute_data.get("refunds", [])
                 if not refunds or all(r.get("status") == "failed" for r in refunds):
                     contradictions.append(
@@ -157,7 +218,6 @@ class EvidenceValidator:
 
         # Rule E: Partial or Pending Refund vs Disputed Amount
         refunds_data = dispute_data.get("refunds", [])
-        dispute_amt = dispute_data.get("dispute", {}).get("amount", 0.0)
         for rfnd in refunds_data:
             if rfnd.get("status") == "pending":
                 contradictions.append(
@@ -186,22 +246,41 @@ class EvidenceValidator:
 
         consistency_score = max(0.0, 1.0 - consistency_deductions)
 
-        # 3. Overall Strength
-        if completeness_score >= 0.80 and consistency_score >= 0.85 and not missing_critical and not contradictions:
+        # -------------------------------------------------------------
+        # 5. DERIVED EVIDENCE STRENGTH
+        # f(Completeness, Reliability, Consistency, Relevance)
+        # -------------------------------------------------------------
+        composite_score = (
+            (completeness_score * 0.40)
+            + (consistency_score * 0.30)
+            + (reliability_score * 0.15)
+            + (relevance_score * 0.15)
+        )
+
+        if (
+            completeness_score >= 0.80
+            and consistency_score >= 0.85
+            and relevance_score >= 0.90
+            and not missing_critical
+            and not contradictions
+        ):
             evidence_strength = "HIGH"
-        elif completeness_score >= 0.50 and consistency_score >= 0.60:
+        elif composite_score >= 0.55:
             evidence_strength = "MEDIUM"
         else:
             evidence_strength = "LOW"
 
         return VerificationResult(
             completeness_score=completeness_score,
+            reliability_score=reliability_score,
             consistency_score=consistency_score,
+            relevance_score=relevance_score,
             evidence_strength=evidence_strength,
             available_evidence=list(available_types),
             missing_critical=missing_critical,
             missing_optional=missing_optional,
             contradictions=contradictions,
+            relevance_warnings=relevance_warnings,
             summary_by_type=summary_by_type,
         )
 

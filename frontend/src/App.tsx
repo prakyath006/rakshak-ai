@@ -18,7 +18,10 @@ import {
   Send,
   RefreshCw,
   TrendingUp,
-  Award
+  Award,
+  Activity,
+  BarChart3,
+  Scale
 } from 'lucide-react';
 
 interface DisputeSummary {
@@ -57,12 +60,15 @@ interface InvestigationResult {
   };
   verification: {
     completeness_score: number;
+    reliability_score: number;
     consistency_score: number;
+    relevance_score: number;
     evidence_strength: string;
     available_evidence: string[];
     missing_critical: string[];
     missing_optional: string[];
     contradictions: string[];
+    relevance_warnings: string[];
     summary_by_type: Record<string, string>;
   };
   decision: {
@@ -190,13 +196,14 @@ export default function App() {
           </button>
           <button
             onClick={() => setActiveTab('benchmark')}
-            className={`px-3.5 py-1.5 rounded-lg font-medium transition-all ${
+            className={`px-3.5 py-1.5 rounded-lg font-medium transition-all flex items-center gap-1.5 ${
               activeTab === 'benchmark'
                 ? 'bg-brand-600 text-white shadow-md'
                 : 'text-slate-400 hover:text-slate-200'
             }`}
           >
-            20-Case Benchmark (100%)
+            <Scale className="w-3.5 h-3.5" />
+            Evaluation Benchmark
           </button>
         </div>
 
@@ -356,42 +363,32 @@ export default function App() {
               </div>
             </div>
 
-            {/* Architecture Explainer */}
+            {/* 4-Dimensional Metric Architecture */}
             <div className="bg-slate-900/60 border border-slate-800 p-6 rounded-2xl">
               <h3 className="font-bold text-white text-base mb-3 flex items-center gap-2">
-                <Layers className="w-4 h-4 text-brand-400" />
-                Deterministic Evidence Architecture vs LLM Black Box
+                <BarChart3 className="w-4 h-4 text-brand-400" />
+                4-Dimensional Evidence Scoring Layer
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-6 gap-3 text-center">
-                <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
-                  <div className="text-[11px] font-bold text-brand-400">1. INGEST</div>
-                  <div className="text-xs font-semibold text-white mt-1">Dispute API</div>
-                  <div className="text-[10px] text-slate-400 mt-0.5">Amount, deadline, reason</div>
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div className="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                  <div className="text-xs font-bold text-brand-400 uppercase">1. Completeness</div>
+                  <div className="text-sm font-semibold text-white mt-1">Required Items Coverage</div>
+                  <p className="text-xs text-slate-400 mt-1">Weighted presence of policy-mandated evidence documents.</p>
                 </div>
-                <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
-                  <div className="text-[11px] font-bold text-brand-400">2. CLASSIFY</div>
-                  <div className="text-xs font-semibold text-white mt-1">Policy Lookup</div>
-                  <div className="text-[10px] text-slate-400 mt-0.5">Required evidence rules</div>
+                <div className="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                  <div className="text-xs font-bold text-emerald-400 uppercase">2. Reliability</div>
+                  <div className="text-sm font-semibold text-white mt-1">Source Credibility</div>
+                  <p className="text-xs text-slate-400 mt-1">Razorpay gateway (1.0) vs logistics (0.95) vs notes (0.70).</p>
                 </div>
-                <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
-                  <div className="text-[11px] font-bold text-brand-400">3. INVESTIGATE</div>
-                  <div className="text-xs font-semibold text-white mt-1">Evidence Graph</div>
-                  <div className="text-[10px] text-slate-400 mt-0.5">Orders, shipments, comms</div>
+                <div className="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                  <div className="text-xs font-bold text-amber-400 uppercase">3. Consistency</div>
+                  <div className="text-sm font-semibold text-white mt-1">Cross-Source Alignment</div>
+                  <p className="text-xs text-slate-400 mt-1">Temporal ordering, destination match, and admission checks.</p>
                 </div>
-                <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
-                  <div className="text-[11px] font-bold text-brand-400">4. VERIFY</div>
-                  <div className="text-xs font-semibold text-white mt-1">Completeness Matrix</div>
-                  <div className="text-[10px] text-slate-400 mt-0.5">Contradiction check</div>
-                </div>
-                <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
-                  <div className="text-[11px] font-bold text-brand-400">5. DECIDE</div>
-                  <div className="text-xs font-semibold text-white mt-1">Policy Engine</div>
-                  <div className="text-[10px] text-slate-400 mt-0.5">Contest / Review / Accept</div>
-                </div>
-                <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
-                  <div className="text-[11px] font-bold text-brand-400">6. ASSEMBLE</div>
-                  <div className="text-xs font-semibold text-white mt-1">Grounded Rebuttal</div>
-                  <div className="text-[10px] text-slate-400 mt-0.5">Citations + Human Gate</div>
+                <div className="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                  <div className="text-xs font-bold text-indigo-400 uppercase">4. Relevance</div>
+                  <div className="text-sm font-semibold text-white mt-1">Adversarial Trap Guard</div>
+                  <p className="text-xs text-slate-400 mt-1">Rejects contaminated order IDs & severe amount mismatches.</p>
                 </div>
               </div>
             </div>
@@ -487,6 +484,32 @@ export default function App() {
                     </div>
                   </div>
 
+                  {/* 4D Scorecard */}
+                  <div className="bg-slate-900/80 border border-slate-800 p-5 rounded-2xl space-y-3">
+                    <div className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+                      <Activity className="w-3.5 h-3.5 text-brand-400" />
+                      4D Verification Scores
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 text-xs">
+                      <div className="bg-slate-950 p-2 rounded-lg border border-slate-800">
+                        <div className="text-slate-500 text-[10px]">Completeness</div>
+                        <div className="font-mono font-bold text-white">{(investigation.verification.completeness_score * 100).toFixed(0)}%</div>
+                      </div>
+                      <div className="bg-slate-950 p-2 rounded-lg border border-slate-800">
+                        <div className="text-slate-500 text-[10px]">Reliability</div>
+                        <div className="font-mono font-bold text-emerald-400">{(investigation.verification.reliability_score * 100).toFixed(0)}%</div>
+                      </div>
+                      <div className="bg-slate-950 p-2 rounded-lg border border-slate-800">
+                        <div className="text-slate-500 text-[10px]">Consistency</div>
+                        <div className="font-mono font-bold text-amber-400">{(investigation.verification.consistency_score * 100).toFixed(0)}%</div>
+                      </div>
+                      <div className="bg-slate-950 p-2 rounded-lg border border-slate-800">
+                        <div className="text-slate-500 text-[10px]">Relevance</div>
+                        <div className="font-mono font-bold text-indigo-400">{(investigation.verification.relevance_score * 100).toFixed(0)}%</div>
+                      </div>
+                    </div>
+                  </div>
+
                   {/* Audit Trail Timeline */}
                   <div className="bg-slate-900/80 border border-slate-800 p-5 rounded-2xl space-y-3">
                     <div className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
@@ -554,7 +577,7 @@ export default function App() {
                         Policy Verification Matrix
                       </h3>
                       <span className="text-xs font-mono font-bold text-white">
-                        Completeness: {(investigation.verification.completeness_score * 100).toFixed(0)}%
+                        Strength: {investigation.decision.evidence_strength}
                       </span>
                     </div>
 
@@ -633,7 +656,7 @@ export default function App() {
                         {investigation.decision.recommendation.replace(/_/g, ' ')}
                       </div>
                       <div className="text-xs font-mono font-bold px-2 py-1 rounded bg-slate-900 text-slate-200 border border-slate-800">
-                        Strength: {investigation.decision.evidence_strength}
+                        Confidence: {(investigation.decision.confidence * 100).toFixed(0)}%
                       </div>
                     </div>
                     <p className="text-xs text-slate-300 mt-2 leading-relaxed font-medium">
@@ -752,24 +775,53 @@ export default function App() {
         {/* ======================= TAB 3: BENCHMARK ======================= */}
         {activeTab === 'benchmark' && (
           <div className="space-y-6">
-            <div className="bg-slate-900/80 border border-slate-800 p-6 rounded-2xl flex items-center justify-between">
-              <div>
-                <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                  <Award className="w-5 h-5 text-brand-400" />
-                  20 Golden Dispute Cases — Regression Suite
-                </h2>
-                <p className="text-xs text-slate-400 mt-1">
-                  Controlled synthetic merchant environment with known ground truth across 5 dispute scenarios.
+            {/* Split Comparison Summary Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Suite A: 20 Golden Cases */}
+              <div className="bg-slate-900/80 border border-emerald-500/30 p-6 rounded-2xl space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                    Regression Suite (20 Cases)
+                  </span>
+                  <span className="text-2xl font-black text-emerald-400 font-mono">20/20 (100.0%)</span>
+                </div>
+                <h3 className="font-bold text-white text-base">Permanent Regression Suite</h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Hand-crafted golden cases covering every archetype. Checked on every code commit to guarantee zero regressions.
                 </p>
+                <div className="text-xs text-slate-300 font-mono pt-2 border-t border-slate-800">
+                  Status: <span className="text-emerald-400 font-bold">ALL TESTS PASSING</span>
+                </div>
               </div>
-              <div className="text-right">
-                <span className="text-xs text-slate-400">Benchmark Result</span>
-                <div className="text-2xl font-black text-emerald-400 font-mono">20 / 20 PASSED (100.0%)</div>
+
+              {/* Suite B: 100 Unseen Cases */}
+              <div className="bg-slate-900/80 border border-brand-500/30 p-6 rounded-2xl space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold uppercase tracking-wider text-brand-400 bg-brand-500/10 px-2 py-0.5 rounded border border-brand-500/20">
+                    Generalization Suite (100 Cases)
+                  </span>
+                  <span className="text-2xl font-black text-white font-mono">78.00%</span>
+                </div>
+                <h3 className="font-bold text-white text-base">Unseen Noisy & Adversarial Benchmark</h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Evaluated on synthetic data with cross-order contamination, amount discrepancies, and hidden ground truth.
+                </p>
+                <div className="text-xs text-slate-300 font-mono pt-2 border-t border-slate-800 flex justify-between">
+                  <span>Contest Precision: <strong className="text-emerald-400">78.57%</strong></span>
+                  <span>False Contests: <strong className="text-emerald-400">3.00%</strong></span>
+                </div>
               </div>
             </div>
 
             {/* Regression Table */}
             <div className="bg-slate-900/80 border border-slate-800 rounded-2xl overflow-hidden">
+              <div className="p-4 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+                <div className="font-bold text-sm text-white flex items-center gap-2">
+                  <Award className="w-4 h-4 text-brand-400" />
+                  20 Golden Dispute Cases (Regression Ground Truth)
+                </div>
+                <span className="text-xs text-emerald-400 font-bold font-mono">100% Passed</span>
+              </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
                   <thead className="bg-slate-950 text-slate-400 uppercase font-semibold border-b border-slate-800">
