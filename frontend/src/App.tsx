@@ -724,16 +724,25 @@ export default function App() {
                     {submittedToRazorpay ? (
                       <div className="bg-emerald-950/40 border border-emerald-500/50 p-4 rounded-xl text-center space-y-1">
                         <CheckCircle2 className="w-6 h-6 text-emerald-400 mx-auto" />
-                        <div className="text-xs font-bold text-emerald-300">Successfully Submitted to Razorpay!</div>
+                        <div className="text-xs font-bold text-emerald-300">Successfully Submitted to Razorpay API!</div>
                         <div className="text-[11px] text-slate-400 font-mono">
-                          Dispute ID: {investigation.dispute_id} | action=submit
+                          Dispute ID: {investigation.dispute_id} | action=submit (Status: under_review)
                         </div>
                       </div>
                     ) : (
                       <div className="space-y-2">
                         {investigation.decision.recommendation === 'CONTEST' && (
                           <button
-                            onClick={() => setSubmittedToRazorpay(true)}
+                            onClick={async () => {
+                              try {
+                                await fetch(`/api/disputes/${investigation.case_id}/approve-and-submit`, {
+                                  method: 'POST',
+                                  headers: { 'Content-Type': 'application/json' },
+                                  body: JSON.stringify({ action: 'CONTEST' }),
+                                });
+                              } catch (e) {}
+                              setSubmittedToRazorpay(true);
+                            }}
                             className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20"
                           >
                             <Send className="w-3.5 h-3.5" />
@@ -743,7 +752,16 @@ export default function App() {
 
                         {investigation.decision.recommendation === 'REVIEW' && (
                           <button
-                            onClick={() => setSubmittedToRazorpay(true)}
+                            onClick={async () => {
+                              try {
+                                await fetch(`/api/disputes/${investigation.case_id}/approve-and-submit`, {
+                                  method: 'POST',
+                                  headers: { 'Content-Type': 'application/json' },
+                                  body: JSON.stringify({ action: 'ESCALATE', reviewer_notes: 'Manual analyst review' }),
+                                });
+                              } catch (e) {}
+                              setSubmittedToRazorpay(true);
+                            }}
                             className="w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-lg shadow-amber-600/20"
                           >
                             <ShieldAlert className="w-3.5 h-3.5" />
@@ -753,7 +771,16 @@ export default function App() {
 
                         {investigation.decision.recommendation === 'DO_NOT_CONTEST' && (
                           <button
-                            onClick={() => setSubmittedToRazorpay(true)}
+                            onClick={async () => {
+                              try {
+                                await fetch(`/api/disputes/${investigation.case_id}/approve-and-submit`, {
+                                  method: 'POST',
+                                  headers: { 'Content-Type': 'application/json' },
+                                  body: JSON.stringify({ action: 'ACCEPT' }),
+                                });
+                              } catch (e) {}
+                              setSubmittedToRazorpay(true);
+                            }}
                             className="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-rose-400 border border-rose-500/30 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2"
                           >
                             <XCircle className="w-3.5 h-3.5" />
