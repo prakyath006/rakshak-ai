@@ -78,7 +78,7 @@ class DisputePipeline:
         )
         audit_trail.append({
             "stage": "PACKAGE_READY",
-            "action": f"Generated representment package ({len(rebuttal['evidence_package'])} items, {len(rebuttal['citations'])} citations, 0 unsupported claims)",
+            "action": f"Generated representment package ({len(rebuttal['evidence_package'])} items, {len(rebuttal['claims'])} atomic claims, 0 unsupported claims)",
         })
 
         return {

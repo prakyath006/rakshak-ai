@@ -244,6 +244,24 @@ class EvidenceValidator:
             )
             consistency_deductions += 0.20
 
+        # Rule G: Temporal Inversion Anomaly (Shipment or Delivery before Order Creation)
+        order_dt_str = order_data.get("created_at")
+        if order_dt_str and shipment_data:
+            order_dt = parse_iso(order_dt_str)
+            shipped_dt = parse_iso(shipment_data.get("shipped_at") or "")
+            delivered_dt = parse_iso(shipment_data.get("delivered_at") or "")
+
+            if order_dt and shipped_dt and shipped_dt < order_dt:
+                contradictions.append(
+                    f"Temporal Inversion Anomaly: Shipment dispatch ({shipment_data.get('shipped_at')}) precedes order creation ({order_dt_str})."
+                )
+                consistency_deductions += 0.50
+            if order_dt and delivered_dt and delivered_dt < order_dt:
+                contradictions.append(
+                    f"Temporal Inversion Anomaly: Delivery timestamp ({shipment_data.get('delivered_at')}) precedes order creation ({order_dt_str})."
+                )
+                consistency_deductions += 0.50
+
         consistency_score = max(0.0, 1.0 - consistency_deductions)
 
         # -------------------------------------------------------------

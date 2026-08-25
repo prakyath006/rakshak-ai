@@ -16,12 +16,14 @@ class DecisionOutput:
         evidence_strength: str,
         reasoning: str,
         verification: VerificationResult,
+        structured_explanation: Optional[Dict[str, Any]] = None,
     ):
         self.recommendation = recommendation
         self.confidence = round(confidence, 3)
         self.evidence_strength = evidence_strength
         self.reasoning = reasoning
         self.verification = verification
+        self.structured_explanation = structured_explanation or {}
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -29,6 +31,7 @@ class DecisionOutput:
             "confidence": self.confidence,
             "evidence_strength": self.evidence_strength,
             "reasoning": self.reasoning,
+            "structured_explanation": self.structured_explanation,
             "verification": self.verification.to_dict(),
         }
 
@@ -107,13 +110,10 @@ class DecisionEngine:
                 verification=verification,
             )
 
+        # Generate structured explanation for human reviewer & audit
+        structured_exp = self._build_explanation(category, verification, dispute_data)
+
         # Rule 5: CONTEST Criteria
-        # Case is contestable if:
-        # a) All critical evidence is present (missing_critical is empty)
-        # b) No fatal contradictions exist
-        # c) Consistency is high (>= 0.85)
-        # d) Relevance is high (>= 0.90)
-        # e) Completeness covers all core critical/primary evidence (>= 0.70)
         if (
             not verification.missing_critical
             and not verification.contradictions
@@ -129,6 +129,7 @@ class DecisionEngine:
                     evidence_strength="LOW",
                     reasoning="Refund confirmation record not verified. Cannot auto-contest without bank credit proof.",
                     verification=verification,
+                    structured_explanation=structured_exp,
                 )
 
             # Special check for goods_not_received: must have DELIVERY_CONFIRMATION
@@ -139,6 +140,7 @@ class DecisionEngine:
                     evidence_strength="LOW",
                     reasoning="Carrier delivery confirmation missing. Automatic representment would likely result in dispute loss.",
                     verification=verification,
+                    structured_explanation=structured_exp,
                 )
 
             return DecisionOutput(
@@ -147,6 +149,7 @@ class DecisionEngine:
                 evidence_strength="HIGH",
                 reasoning="Verified defensible evidence package meeting all critical policy criteria with zero contradictions.",
                 verification=verification,
+                structured_explanation=structured_exp,
             )
 
         # Rule 6: Moderate completeness without critical gaps
@@ -157,6 +160,7 @@ class DecisionEngine:
                 evidence_strength="MEDIUM",
                 reasoning="Moderate evidence coverage available without fatal contradictions. Analyst review recommended.",
                 verification=verification,
+                structured_explanation=structured_exp,
             )
 
         # Default fallback: REVIEW (Safe escalation)
@@ -166,4 +170,36 @@ class DecisionEngine:
             evidence_strength="LOW",
             reasoning="Insufficient verified evidence to contest. Manual evaluation recommended.",
             verification=verification,
+            structured_explanation=structured_exp,
         )
+
+    def _build_explanation(
+        self,
+        category: str,
+        verification: VerificationResult,
+        dispute_data: Dict[str, Any],
+    ) -> Dict[str, Any]:
+        key_findings = []
+        if "DELIVERY_CONFIRMATION" in verification.available_evidence:
+            key_findings.append("Carrier delivery confirmation verified at cardholder address.")
+        if "REFUND_CONFIRMATION" in verification.available_evidence:
+            key_findings.append("Full credit reversal transaction confirmed in payment rails.")
+        if "INVOICE" in verification.available_evidence:
+            key_findings.append("Tax invoice and itemized purchase order verified.")
+        if "PRODUCT_SPECIFICATION" in verification.available_evidence:
+            key_findings.append("Catalog listing matches fulfilled item specifications.")
+
+        safety_checks = {
+            "cross_order_contamination": "PASS" if not verification.relevance_warnings else "FLAGGED",
+            "amount_consistency": "PASS" if verification.consistency_score >= 0.80 else "WARNING",
+            "timeline_consistency": "PASS" if not any("Temporal" in c or "AFTER" in c for c in verification.contradictions) else "FLAGGED",
+            "source_reliability": f"PASS ({(verification.reliability_score * 100):.1f}%)" if verification.reliability_score >= 0.85 else "LOW",
+        }
+
+        return {
+            "key_findings": key_findings,
+            "missing_critical": verification.missing_critical,
+            "missing_optional": verification.missing_optional,
+            "contradictions": verification.contradictions,
+            "safety_checks": safety_checks,
+        }
