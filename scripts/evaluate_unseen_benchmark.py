@@ -19,9 +19,14 @@ from app.agents.pipeline import DisputePipeline
 
 
 def main():
-    benchmark_path = Path(__file__).parent.parent / "data" / "unseen_benchmark_100.json"
+    import argparse
+    parser = argparse.ArgumentParser(description="Evaluate Rakshak on unseen benchmark disputes")
+    parser.add_argument("--dataset", type=str, default="data/unseen_benchmark_100.json", help="Path to benchmark JSON")
+    args = parser.parse_args()
+
+    benchmark_path = Path(__file__).parent.parent / args.dataset
     if not benchmark_path.exists():
-        print(f"Error: {benchmark_path} not found. Run generate_unseen_benchmark.py first.")
+        print(f"Error: {benchmark_path} not found.")
         sys.exit(1)
 
     with open(benchmark_path, "r", encoding="utf-8") as f:

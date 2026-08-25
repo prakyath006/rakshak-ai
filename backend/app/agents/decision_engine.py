@@ -107,31 +107,59 @@ class DecisionEngine:
                 verification=verification,
             )
 
-        # Rule 5: High completeness & High consistency -> CONTEST
+        # Rule 5: CONTEST Criteria
+        # Case is contestable if:
+        # a) All critical evidence is present (missing_critical is empty)
+        # b) No fatal contradictions exist
+        # c) Consistency is high (>= 0.85)
+        # d) Relevance is high (>= 0.90)
+        # e) Completeness covers all core critical/primary evidence (>= 0.70)
         if (
-            verification.completeness_score >= 0.80
+            not verification.missing_critical
+            and not verification.contradictions
             and verification.consistency_score >= 0.85
-            and not verification.missing_critical
+            and verification.relevance_score >= 0.90
+            and verification.completeness_score >= 0.70
         ):
+            # Special check for credit_not_processed: must have REFUND_CONFIRMATION
+            if category == "credit_not_processed" and "REFUND_CONFIRMATION" not in verification.available_evidence:
+                return DecisionOutput(
+                    recommendation="REVIEW",
+                    confidence=0.50,
+                    evidence_strength="LOW",
+                    reasoning="Refund confirmation record not verified. Cannot auto-contest without bank credit proof.",
+                    verification=verification,
+                )
+
+            # Special check for goods_not_received: must have DELIVERY_CONFIRMATION
+            if category == "goods_not_received" and "DELIVERY_CONFIRMATION" not in verification.available_evidence:
+                return DecisionOutput(
+                    recommendation="REVIEW",
+                    confidence=0.45,
+                    evidence_strength="LOW",
+                    reasoning="Carrier delivery confirmation missing. Automatic representment would likely result in dispute loss.",
+                    verification=verification,
+                )
+
             return DecisionOutput(
                 recommendation="CONTEST",
                 confidence=0.95,
                 evidence_strength="HIGH",
-                reasoning="Complete and consistent evidence package verified against card-network dispute policy. Case is strongly defensible.",
+                reasoning="Verified defensible evidence package meeting all critical policy criteria with zero contradictions.",
                 verification=verification,
             )
 
         # Rule 6: Moderate completeness without critical gaps
-        if verification.completeness_score >= 0.50:
+        if verification.completeness_score >= 0.50 and not verification.missing_critical:
             return DecisionOutput(
                 recommendation="REVIEW",
                 confidence=0.65,
                 evidence_strength="MEDIUM",
-                reasoning="Moderate evidence coverage available. Review evidence package before submission.",
+                reasoning="Moderate evidence coverage available without fatal contradictions. Analyst review recommended.",
                 verification=verification,
             )
 
-        # Default fallback: REVIEW
+        # Default fallback: REVIEW (Safe escalation)
         return DecisionOutput(
             recommendation="REVIEW",
             confidence=0.50,

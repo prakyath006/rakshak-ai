@@ -28,7 +28,7 @@
       "product_id": "PROD-UNS-0001",
       "name": "Designer Leather Laptop Bag",
       "description": "Original catalog listing for Designer Leather Laptop Bag",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 7200.0,
       "category": "Accessories"
     },
@@ -108,7 +108,7 @@
       "product_id": "PROD-UNS-0002",
       "name": "Designer Leather Laptop Bag",
       "description": "Original catalog listing for Designer Leather Laptop Bag",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 7200.0,
       "category": "Accessories"
     },
@@ -188,7 +188,7 @@
       "product_id": "PROD-UNS-0003",
       "name": "Flagship 5G Smartphone 256GB",
       "description": "Original catalog listing for Flagship 5G Smartphone 256GB",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 52000.0,
       "category": "Mobiles"
     },
@@ -260,7 +260,7 @@
       "product_id": "PROD-UNS-0004",
       "name": "Ergonomic Office Chair Pro",
       "description": "Original catalog listing for Ergonomic Office Chair Pro",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 18500.0,
       "category": "Furniture"
     },
@@ -476,7 +476,7 @@
       "product_id": "PROD-UNS-0007",
       "name": "4K Ultra HD Dash Camera",
       "description": "Original catalog listing for 4K Ultra HD Dash Camera",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 8900.0,
       "category": "Auto"
     },
@@ -548,7 +548,7 @@
       "product_id": "PROD-UNS-0008",
       "name": "Handcrafted Silk Kurta Set",
       "description": "Original catalog listing for Handcrafted Silk Kurta Set",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 6500.0,
       "category": "Apparel"
     },
@@ -620,7 +620,7 @@
       "product_id": "PROD-UNS-0009",
       "name": "Smart Fitness Watch Ultra",
       "description": "Original catalog listing for Smart Fitness Watch Ultra",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 12000.0,
       "category": "Wearables"
     },
@@ -692,7 +692,7 @@
       "product_id": "PROD-UNS-0010",
       "name": "Handcrafted Silk Kurta Set",
       "description": "Original catalog listing for Handcrafted Silk Kurta Set",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 6500.0,
       "category": "Apparel"
     },
@@ -754,7 +754,7 @@
       "product_id": "PROD-UNS-0011",
       "name": "Handcrafted Silk Kurta Set",
       "description": "Original catalog listing for Handcrafted Silk Kurta Set",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 6500.0,
       "category": "Apparel"
     },
@@ -826,7 +826,7 @@
       "product_id": "PROD-UNS-0012",
       "name": "Wireless Noise Cancelling Earbuds",
       "description": "Original catalog listing for Wireless Noise Cancelling Earbuds",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 4500.0,
       "category": "Audio"
     },
@@ -1052,7 +1052,7 @@
       "product_id": "PROD-UNS-0015",
       "name": "Handcrafted Silk Kurta Set",
       "description": "Original catalog listing for Handcrafted Silk Kurta Set",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 6500.0,
       "category": "Apparel"
     },
@@ -1114,7 +1114,7 @@
       "product_id": "PROD-UNS-0016",
       "name": "Designer Leather Laptop Bag",
       "description": "Original catalog listing for Designer Leather Laptop Bag",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 7200.0,
       "category": "Accessories"
     },
@@ -1195,7 +1195,7 @@
       "product_id": "PROD-UNS-0017",
       "name": "Organic Whey Protein 2kg",
       "description": "Original catalog listing for Organic Whey Protein 2kg",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 5400.0,
       "category": "Supplements"
     },
@@ -1275,7 +1275,7 @@
       "product_id": "PROD-UNS-0018",
       "name": "Smart Home Hub Gateway",
       "description": "Original catalog listing for Smart Home Hub Gateway",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 14000.0,
       "category": "Smart Home"
     },
@@ -1347,7 +1347,7 @@
       "product_id": "PROD-UNS-0019",
       "name": "Handcrafted Silk Kurta Set",
       "description": "Original catalog listing for Handcrafted Silk Kurta Set",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 6500.0,
       "category": "Apparel"
     },
@@ -1419,7 +1419,7 @@
       "product_id": "PROD-UNS-0020",
       "name": "Designer Leather Laptop Bag",
       "description": "Original catalog listing for Designer Leather Laptop Bag",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 7200.0,
       "category": "Accessories"
     },
@@ -1499,7 +1499,7 @@
       "product_id": "PROD-UNS-0021",
       "name": "Organic Whey Protein 2kg",
       "description": "Original catalog listing for Organic Whey Protein 2kg",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 5400.0,
       "category": "Supplements"
     },
@@ -1579,7 +1579,7 @@
       "product_id": "PROD-UNS-0022",
       "name": "Smart Fitness Watch Ultra",
       "description": "Original catalog listing for Smart Fitness Watch Ultra",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 12000.0,
       "category": "Wearables"
     },
@@ -1660,7 +1660,7 @@
       "product_id": "PROD-UNS-0023",
       "name": "Organic Whey Protein 2kg",
       "description": "Original catalog listing for Organic Whey Protein 2kg",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 5400.0,
       "category": "Supplements"
     },
@@ -1740,7 +1740,7 @@
       "product_id": "PROD-UNS-0024",
       "name": "Flagship 5G Smartphone 256GB",
       "description": "Original catalog listing for Flagship 5G Smartphone 256GB",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 52000.0,
       "category": "Mobiles"
     },
@@ -1812,7 +1812,7 @@
       "product_id": "PROD-UNS-0025",
       "name": "Handcrafted Silk Kurta Set",
       "description": "Original catalog listing for Handcrafted Silk Kurta Set",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 6500.0,
       "category": "Apparel"
     },
@@ -1884,7 +1884,7 @@
       "product_id": "PROD-UNS-0026",
       "name": "Designer Leather Laptop Bag",
       "description": "Original catalog listing for Designer Leather Laptop Bag",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 7200.0,
       "category": "Accessories"
     },
@@ -1965,7 +1965,7 @@
       "product_id": "PROD-UNS-0027",
       "name": "Handcrafted Silk Kurta Set",
       "description": "Original catalog listing for Handcrafted Silk Kurta Set",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 6500.0,
       "category": "Apparel"
     },
@@ -2037,7 +2037,7 @@
       "product_id": "PROD-UNS-0028",
       "name": "4K Ultra HD Dash Camera",
       "description": "Original catalog listing for 4K Ultra HD Dash Camera",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 8900.0,
       "category": "Auto"
     },
@@ -2118,7 +2118,7 @@
       "product_id": "PROD-UNS-0029",
       "name": "Smart Home Hub Gateway",
       "description": "Original catalog listing for Smart Home Hub Gateway",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 14000.0,
       "category": "Smart Home"
     },
@@ -2190,7 +2190,7 @@
       "product_id": "PROD-UNS-0030",
       "name": "Designer Leather Laptop Bag",
       "description": "Original catalog listing for Designer Leather Laptop Bag",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 7200.0,
       "category": "Accessories"
     },
@@ -2270,7 +2270,7 @@
       "product_id": "PROD-UNS-0031",
       "name": "Smart Fitness Watch Ultra",
       "description": "Original catalog listing for Smart Fitness Watch Ultra",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 12000.0,
       "category": "Wearables"
     },
@@ -2342,7 +2342,7 @@
       "product_id": "PROD-UNS-0032",
       "name": "Designer Leather Laptop Bag",
       "description": "Original catalog listing for Designer Leather Laptop Bag",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 7200.0,
       "category": "Accessories"
     },
@@ -2422,7 +2422,7 @@
       "product_id": "PROD-UNS-0033",
       "name": "Studio Monitor Speakers Pair",
       "description": "Original catalog listing for Studio Monitor Speakers Pair",
-      "specification": "Advertised: 16GB. Fulfilled: 8GB model.",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 28000.0,
       "category": "Audio"
     },
@@ -2494,7 +2494,7 @@
       "product_id": "PROD-UNS-0034",
       "name": "Mechanical Keyboard RGB 75%",
       "description": "Original catalog listing for Mechanical Keyboard RGB 75%",
-      "specification": "Advertised: 16GB. Fulfilled: 8GB model.",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 9500.0,
       "category": "Accessories"
     },
@@ -2566,7 +2566,7 @@
       "product_id": "PROD-UNS-0035",
       "name": "Handcrafted Silk Kurta Set",
       "description": "Original catalog listing for Handcrafted Silk Kurta Set",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 6500.0,
       "category": "Apparel"
     },
@@ -2628,7 +2628,7 @@
       "product_id": "PROD-UNS-0036",
       "name": "Organic Whey Protein 2kg",
       "description": "Original catalog listing for Organic Whey Protein 2kg",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 5400.0,
       "category": "Supplements"
     },
@@ -2708,7 +2708,7 @@
       "product_id": "PROD-UNS-0037",
       "name": "Flagship 5G Smartphone 256GB",
       "description": "Original catalog listing for Flagship 5G Smartphone 256GB",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 52000.0,
       "category": "Mobiles"
     },
@@ -2780,7 +2780,7 @@
       "product_id": "PROD-UNS-0038",
       "name": "Mechanical Keyboard RGB 75%",
       "description": "Original catalog listing for Mechanical Keyboard RGB 75%",
-      "specification": "Advertised: 16GB. Fulfilled: 8GB model.",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 9500.0,
       "category": "Accessories"
     },
@@ -2852,7 +2852,7 @@
       "product_id": "PROD-UNS-0039",
       "name": "Flagship 5G Smartphone 256GB",
       "description": "Original catalog listing for Flagship 5G Smartphone 256GB",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 52000.0,
       "category": "Mobiles"
     },
@@ -2924,7 +2924,7 @@
       "product_id": "PROD-UNS-0040",
       "name": "Smart Fitness Watch Ultra",
       "description": "Original catalog listing for Smart Fitness Watch Ultra",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 12000.0,
       "category": "Wearables"
     },
@@ -3005,7 +3005,7 @@
       "product_id": "PROD-UNS-0041",
       "name": "Designer Leather Laptop Bag",
       "description": "Original catalog listing for Designer Leather Laptop Bag",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 7200.0,
       "category": "Accessories"
     },
@@ -3085,7 +3085,7 @@
       "product_id": "PROD-UNS-0042",
       "name": "Smart Fitness Watch Ultra",
       "description": "Original catalog listing for Smart Fitness Watch Ultra",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 12000.0,
       "category": "Wearables"
     },
@@ -3166,7 +3166,7 @@
       "product_id": "PROD-UNS-0043",
       "name": "Organic Whey Protein 2kg",
       "description": "Original catalog listing for Organic Whey Protein 2kg",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 5400.0,
       "category": "Supplements"
     },
@@ -3246,7 +3246,7 @@
       "product_id": "PROD-UNS-0044",
       "name": "Designer Leather Laptop Bag",
       "description": "Original catalog listing for Designer Leather Laptop Bag",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 7200.0,
       "category": "Accessories"
     },
@@ -3327,7 +3327,7 @@
       "product_id": "PROD-UNS-0045",
       "name": "Wireless Noise Cancelling Earbuds",
       "description": "Original catalog listing for Wireless Noise Cancelling Earbuds",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 4500.0,
       "category": "Audio"
     },
@@ -3399,7 +3399,7 @@
       "product_id": "PROD-UNS-0046",
       "name": "Studio Monitor Speakers Pair",
       "description": "Original catalog listing for Studio Monitor Speakers Pair",
-      "specification": "Advertised: 16GB. Fulfilled: 8GB model.",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 28000.0,
       "category": "Audio"
     },
@@ -3471,7 +3471,7 @@
       "product_id": "PROD-UNS-0047",
       "name": "Mechanical Keyboard RGB 75%",
       "description": "Original catalog listing for Mechanical Keyboard RGB 75%",
-      "specification": "Advertised: 16GB. Fulfilled: 8GB model.",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 9500.0,
       "category": "Accessories"
     },
@@ -3615,7 +3615,7 @@
       "product_id": "PROD-UNS-0049",
       "name": "Smart Fitness Watch Ultra",
       "description": "Original catalog listing for Smart Fitness Watch Ultra",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 12000.0,
       "category": "Wearables"
     },
@@ -3696,7 +3696,7 @@
       "product_id": "PROD-UNS-0050",
       "name": "Organic Whey Protein 2kg",
       "description": "Original catalog listing for Organic Whey Protein 2kg",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 5400.0,
       "category": "Supplements"
     },
@@ -3776,7 +3776,7 @@
       "product_id": "PROD-UNS-0051",
       "name": "Smart Home Hub Gateway",
       "description": "Original catalog listing for Smart Home Hub Gateway",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 14000.0,
       "category": "Smart Home"
     },
@@ -3848,7 +3848,7 @@
       "product_id": "PROD-UNS-0052",
       "name": "Designer Leather Laptop Bag",
       "description": "Original catalog listing for Designer Leather Laptop Bag",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 7200.0,
       "category": "Accessories"
     },
@@ -3928,7 +3928,7 @@
       "product_id": "PROD-UNS-0053",
       "name": "Wireless Noise Cancelling Earbuds",
       "description": "Original catalog listing for Wireless Noise Cancelling Earbuds",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 4500.0,
       "category": "Audio"
     },
@@ -4081,7 +4081,7 @@
       "product_id": "PROD-UNS-0055",
       "name": "Ergonomic Office Chair Pro",
       "description": "Original catalog listing for Ergonomic Office Chair Pro",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 18500.0,
       "category": "Furniture"
     },
@@ -4153,7 +4153,7 @@
       "product_id": "PROD-UNS-0056",
       "name": "Designer Leather Laptop Bag",
       "description": "Original catalog listing for Designer Leather Laptop Bag",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 7200.0,
       "category": "Accessories"
     },
@@ -4233,7 +4233,7 @@
       "product_id": "PROD-UNS-0057",
       "name": "Studio Monitor Speakers Pair",
       "description": "Original catalog listing for Studio Monitor Speakers Pair",
-      "specification": "Advertised: 16GB. Fulfilled: 8GB model.",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 28000.0,
       "category": "Audio"
     },
@@ -4377,7 +4377,7 @@
       "product_id": "PROD-UNS-0059",
       "name": "Smart Fitness Watch Ultra",
       "description": "Original catalog listing for Smart Fitness Watch Ultra",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 12000.0,
       "category": "Wearables"
     },
@@ -4458,7 +4458,7 @@
       "product_id": "PROD-UNS-0060",
       "name": "Mechanical Keyboard RGB 75%",
       "description": "Original catalog listing for Mechanical Keyboard RGB 75%",
-      "specification": "Advertised: 16GB. Fulfilled: 8GB model.",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 9500.0,
       "category": "Accessories"
     },
@@ -4530,7 +4530,7 @@
       "product_id": "PROD-UNS-0061",
       "name": "Smart Fitness Watch Ultra",
       "description": "Original catalog listing for Smart Fitness Watch Ultra",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 12000.0,
       "category": "Wearables"
     },
@@ -4612,7 +4612,7 @@
       "product_id": "PROD-UNS-0062",
       "name": "Ergonomic Office Chair Pro",
       "description": "Original catalog listing for Ergonomic Office Chair Pro",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 18500.0,
       "category": "Furniture"
     },
@@ -4684,7 +4684,7 @@
       "product_id": "PROD-UNS-0063",
       "name": "Smart Fitness Watch Ultra",
       "description": "Original catalog listing for Smart Fitness Watch Ultra",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 12000.0,
       "category": "Wearables"
     },
@@ -4765,7 +4765,7 @@
       "product_id": "PROD-UNS-0064",
       "name": "Mechanical Keyboard RGB 75%",
       "description": "Original catalog listing for Mechanical Keyboard RGB 75%",
-      "specification": "Advertised: 16GB. Fulfilled: 8GB model.",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 9500.0,
       "category": "Accessories"
     },
@@ -4837,7 +4837,7 @@
       "product_id": "PROD-UNS-0065",
       "name": "Handcrafted Silk Kurta Set",
       "description": "Original catalog listing for Handcrafted Silk Kurta Set",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 6500.0,
       "category": "Apparel"
     },
@@ -4909,7 +4909,7 @@
       "product_id": "PROD-UNS-0066",
       "name": "Wireless Noise Cancelling Earbuds",
       "description": "Original catalog listing for Wireless Noise Cancelling Earbuds",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 4500.0,
       "category": "Audio"
     },
@@ -4981,7 +4981,7 @@
       "product_id": "PROD-UNS-0067",
       "name": "Handcrafted Silk Kurta Set",
       "description": "Original catalog listing for Handcrafted Silk Kurta Set",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 6500.0,
       "category": "Apparel"
     },
@@ -5053,7 +5053,7 @@
       "product_id": "PROD-UNS-0068",
       "name": "Organic Whey Protein 2kg",
       "description": "Original catalog listing for Organic Whey Protein 2kg",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 5400.0,
       "category": "Supplements"
     },
@@ -5134,7 +5134,7 @@
       "product_id": "PROD-UNS-0069",
       "name": "Flagship 5G Smartphone 256GB",
       "description": "Original catalog listing for Flagship 5G Smartphone 256GB",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 52000.0,
       "category": "Mobiles"
     },
@@ -5206,7 +5206,7 @@
       "product_id": "PROD-UNS-0070",
       "name": "4K Ultra HD Dash Camera",
       "description": "Original catalog listing for 4K Ultra HD Dash Camera",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 8900.0,
       "category": "Auto"
     },
@@ -5287,7 +5287,7 @@
       "product_id": "PROD-UNS-0071",
       "name": "Wireless Noise Cancelling Earbuds",
       "description": "Original catalog listing for Wireless Noise Cancelling Earbuds",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 4500.0,
       "category": "Audio"
     },
@@ -5359,7 +5359,7 @@
       "product_id": "PROD-UNS-0072",
       "name": "Smart Home Hub Gateway",
       "description": "Original catalog listing for Smart Home Hub Gateway",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 14000.0,
       "category": "Smart Home"
     },
@@ -5503,7 +5503,7 @@
       "product_id": "PROD-UNS-0074",
       "name": "Flagship 5G Smartphone 256GB",
       "description": "Original catalog listing for Flagship 5G Smartphone 256GB",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 52000.0,
       "category": "Mobiles"
     },
@@ -5647,7 +5647,7 @@
       "product_id": "PROD-UNS-0076",
       "name": "Flagship 5G Smartphone 256GB",
       "description": "Original catalog listing for Flagship 5G Smartphone 256GB",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 52000.0,
       "category": "Mobiles"
     },
@@ -5719,7 +5719,7 @@
       "product_id": "PROD-UNS-0077",
       "name": "4K Ultra HD Dash Camera",
       "description": "Original catalog listing for 4K Ultra HD Dash Camera",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 8900.0,
       "category": "Auto"
     },
@@ -5801,7 +5801,7 @@
       "product_id": "PROD-UNS-0078",
       "name": "Handcrafted Silk Kurta Set",
       "description": "Original catalog listing for Handcrafted Silk Kurta Set",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 6500.0,
       "category": "Apparel"
     },
@@ -5873,7 +5873,7 @@
       "product_id": "PROD-UNS-0079",
       "name": "Handcrafted Silk Kurta Set",
       "description": "Original catalog listing for Handcrafted Silk Kurta Set",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 6500.0,
       "category": "Apparel"
     },
@@ -5935,7 +5935,7 @@
       "product_id": "PROD-UNS-0080",
       "name": "Handcrafted Silk Kurta Set",
       "description": "Original catalog listing for Handcrafted Silk Kurta Set",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 6500.0,
       "category": "Apparel"
     },
@@ -6079,7 +6079,7 @@
       "product_id": "PROD-UNS-0082",
       "name": "Smart Fitness Watch Ultra",
       "description": "Original catalog listing for Smart Fitness Watch Ultra",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 12000.0,
       "category": "Wearables"
     },
@@ -6160,7 +6160,7 @@
       "product_id": "PROD-UNS-0083",
       "name": "Wireless Noise Cancelling Earbuds",
       "description": "Original catalog listing for Wireless Noise Cancelling Earbuds",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 4500.0,
       "category": "Audio"
     },
@@ -6241,7 +6241,7 @@
       "product_id": "PROD-UNS-0084",
       "name": "Flagship 5G Smartphone 256GB",
       "description": "Original catalog listing for Flagship 5G Smartphone 256GB",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 52000.0,
       "category": "Mobiles"
     },
@@ -6313,7 +6313,7 @@
       "product_id": "PROD-UNS-0085",
       "name": "Flagship 5G Smartphone 256GB",
       "description": "Original catalog listing for Flagship 5G Smartphone 256GB",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 52000.0,
       "category": "Mobiles"
     },
@@ -6385,7 +6385,7 @@
       "product_id": "PROD-UNS-0086",
       "name": "Wireless Noise Cancelling Earbuds",
       "description": "Original catalog listing for Wireless Noise Cancelling Earbuds",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 4500.0,
       "category": "Audio"
     },
@@ -6466,7 +6466,7 @@
       "product_id": "PROD-UNS-0087",
       "name": "Mechanical Keyboard RGB 75%",
       "description": "Original catalog listing for Mechanical Keyboard RGB 75%",
-      "specification": "Advertised: 16GB. Fulfilled: 8GB model.",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 9500.0,
       "category": "Accessories"
     },
@@ -6538,7 +6538,7 @@
       "product_id": "PROD-UNS-0088",
       "name": "Handcrafted Silk Kurta Set",
       "description": "Original catalog listing for Handcrafted Silk Kurta Set",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 6500.0,
       "category": "Apparel"
     },
@@ -6610,7 +6610,7 @@
       "product_id": "PROD-UNS-0089",
       "name": "Smart Fitness Watch Ultra",
       "description": "Original catalog listing for Smart Fitness Watch Ultra",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 12000.0,
       "category": "Wearables"
     },
@@ -6763,7 +6763,7 @@
       "product_id": "PROD-UNS-0091",
       "name": "Flagship 5G Smartphone 256GB",
       "description": "Original catalog listing for Flagship 5G Smartphone 256GB",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 52000.0,
       "category": "Mobiles"
     },
@@ -6835,7 +6835,7 @@
       "product_id": "PROD-UNS-0092",
       "name": "Wireless Noise Cancelling Earbuds",
       "description": "Original catalog listing for Wireless Noise Cancelling Earbuds",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 4500.0,
       "category": "Audio"
     },
@@ -6916,7 +6916,7 @@
       "product_id": "PROD-UNS-0093",
       "name": "Smart Fitness Watch Ultra",
       "description": "Original catalog listing for Smart Fitness Watch Ultra",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 12000.0,
       "category": "Wearables"
     },
@@ -6988,7 +6988,7 @@
       "product_id": "PROD-UNS-0094",
       "name": "4K Ultra HD Dash Camera",
       "description": "Original catalog listing for 4K Ultra HD Dash Camera",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 8900.0,
       "category": "Auto"
     },
@@ -7060,7 +7060,7 @@
       "product_id": "PROD-UNS-0095",
       "name": "Organic Whey Protein 2kg",
       "description": "Original catalog listing for Organic Whey Protein 2kg",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 5400.0,
       "category": "Supplements"
     },
@@ -7140,7 +7140,7 @@
       "product_id": "PROD-UNS-0096",
       "name": "Organic Whey Protein 2kg",
       "description": "Original catalog listing for Organic Whey Protein 2kg",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 5400.0,
       "category": "Supplements"
     },
@@ -7220,7 +7220,7 @@
       "product_id": "PROD-UNS-0097",
       "name": "Flagship 5G Smartphone 256GB",
       "description": "Original catalog listing for Flagship 5G Smartphone 256GB",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 52000.0,
       "category": "Mobiles"
     },
@@ -7292,7 +7292,7 @@
       "product_id": "PROD-UNS-0098",
       "name": "Ergonomic Office Chair Pro",
       "description": "Original catalog listing for Ergonomic Office Chair Pro",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 18500.0,
       "category": "Furniture"
     },
@@ -7373,7 +7373,7 @@
       "product_id": "PROD-UNS-0099",
       "name": "Wireless Noise Cancelling Earbuds",
       "description": "Original catalog listing for Wireless Noise Cancelling Earbuds",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 4500.0,
       "category": "Audio"
     },
@@ -7454,7 +7454,7 @@
       "product_id": "PROD-UNS-0100",
       "name": "Handcrafted Silk Kurta Set",
       "description": "Original catalog listing for Handcrafted Silk Kurta Set",
-      "specification": "Standard manufacturer configuration",
+      "specification": "Standard manufacturer configuration and technical specifications.",
       "price": 6500.0,
       "category": "Apparel"
     },

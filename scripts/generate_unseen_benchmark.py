@@ -66,22 +66,34 @@ def generate_unseen_dataset(count: int = 100):
     cases = []
     base_date = datetime(2026, 7, 1, 10, 0, 0)
 
-    # Categories distribution:
-    # 30 GNR, 20 CNP, 20 NAD, 15 CANC, 15 FRAUD
-    cat_distribution = (
+    # Categories distribution proportional weights:
+    # 30% GNR, 20% CNP, 20% NAD, 15% CANC, 15% FRAUD
+    base_pool = (
         ["goods_not_received"] * 30
         + ["credit_not_processed"] * 20
         + ["not_as_described"] * 20
         + ["cancelled_merchandise"] * 15
         + ["unauthorized_fraud"] * 15
     )
+    multiplier = (count // len(base_pool)) + 1
+    cat_distribution = (base_pool * multiplier)[:count]
     random.shuffle(cat_distribution)
 
     for i in range(1, count + 1):
         case_id = f"UNSEEN-{i:03d}"
         cat = cat_distribution[i - 1]
         merchant = random.choice(MERCHANTS)
-        prod = random.choice([p for p in PRODUCTS if p["cat"] == cat] or PRODUCTS)
+        
+        # Deep copy product dictionary to prevent mutation leakage
+        raw_prod = random.choice([p for p in PRODUCTS if p["cat"] == cat] or PRODUCTS)
+        prod = {
+            "name": raw_prod["name"],
+            "cat": raw_prod["cat"],
+            "price": raw_prod["price"],
+            "pcat": raw_prod["pcat"],
+            "specification": "Standard manufacturer configuration and technical specifications.",
+        }
+        
         city = random.choice(CITIES)
         cust_name = f"{random.choice(FIRST_NAMES)} {random.choice(LAST_NAMES)}"
         cust_id = f"CUS-UNS-{i:04d}"
