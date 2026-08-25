@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+.venv/
+venv/
+env/
+
+# Environment
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+pgdata/
+
+# Node (frontend)
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Data (generated - don't commit large datasets)
+data/generated/*.csv
+data/generated/*.json
+!data/generated/.gitkeep
+
+# Evaluation results
+evaluation/results/*.json
+evaluation/results/*.csv
+!evaluation/results/.gitkeep
+
+# Logs
+*.log

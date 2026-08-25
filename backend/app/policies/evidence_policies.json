@@ -1,0 +1,296 @@
+{
+  "13.1": {
+    "category": "goods_not_received",
+    "network": "visa",
+    "reason_description": "Merchandise/Services Not Received",
+    "required_evidence": [
+      {
+        "type": "DELIVERY_CONFIRMATION",
+        "razorpay_field": "shipping_proof",
+        "critical": true,
+        "weight": 0.35,
+        "description": "Proof of delivery showing customer received goods"
+      },
+      {
+        "type": "SHIPPING_PROOF",
+        "razorpay_field": "shipping_proof",
+        "critical": true,
+        "weight": 0.25,
+        "description": "Carrier tracking number and shipment dispatch timestamp"
+      },
+      {
+        "type": "INVOICE",
+        "razorpay_field": "billing_proof",
+        "critical": false,
+        "weight": 0.15,
+        "description": "Itemized tax invoice matching payment amount"
+      },
+      {
+        "type": "ORDER_RECORD",
+        "razorpay_field": "billing_proof",
+        "critical": false,
+        "weight": 0.10,
+        "description": "Order confirmation and purchase summary"
+      },
+      {
+        "type": "CUSTOMER_COMMUNICATION",
+        "razorpay_field": "customer_communication",
+        "critical": false,
+        "weight": 0.10,
+        "description": "Customer interactions regarding delivery or fulfillment"
+      },
+      {
+        "type": "TERMS_AND_CONDITIONS",
+        "razorpay_field": "term_and_conditions",
+        "critical": false,
+        "weight": 0.05,
+        "description": "Merchant delivery, fulfillment, and refund policy terms"
+      }
+    ]
+  },
+  "1064": {
+    "category": "goods_not_received",
+    "network": "upi_rupay",
+    "reason_description": "Goods/Services Not Received",
+    "required_evidence": [
+      {
+        "type": "DELIVERY_CONFIRMATION",
+        "razorpay_field": "shipping_proof",
+        "critical": true,
+        "weight": 0.35,
+        "description": "Proof of product or service delivery"
+      },
+      {
+        "type": "CUSTOMER_COMMUNICATION",
+        "razorpay_field": "customer_communication",
+        "critical": false,
+        "weight": 0.25,
+        "description": "Customer interaction showcasing product/service enquiries"
+      },
+      {
+        "type": "INVOICE",
+        "razorpay_field": "billing_proof",
+        "critical": false,
+        "weight": 0.20,
+        "description": "Invoice showing transaction amount and item details"
+      },
+      {
+        "type": "TERMS_AND_CONDITIONS",
+        "razorpay_field": "term_and_conditions",
+        "critical": false,
+        "weight": 0.20,
+        "description": "Terms & Conditions showcasing refund & fulfillment policies"
+      }
+    ]
+  },
+  "C08": {
+    "category": "goods_not_received",
+    "network": "amex",
+    "reason_description": "Goods/Services Not Received",
+    "required_evidence": [
+      {
+        "type": "DELIVERY_CONFIRMATION",
+        "razorpay_field": "shipping_proof",
+        "critical": true,
+        "weight": 0.40,
+        "description": "Delivery confirmation or carrier tracking receipt"
+      },
+      {
+        "type": "SHIPPING_PROOF",
+        "razorpay_field": "shipping_proof",
+        "critical": true,
+        "weight": 0.30,
+        "description": "Proof of shipment dispatch"
+      },
+      {
+        "type": "CUSTOMER_COMMUNICATION",
+        "razorpay_field": "customer_communication",
+        "critical": false,
+        "weight": 0.20,
+        "description": "Customer correspondence"
+      },
+      {
+        "type": "TERMS_AND_CONDITIONS",
+        "razorpay_field": "term_and_conditions",
+        "critical": false,
+        "weight": 0.10,
+        "description": "Merchant delivery terms"
+      }
+    ]
+  },
+  "13.6": {
+    "category": "credit_not_processed",
+    "network": "visa",
+    "reason_description": "Credit Not Processed",
+    "required_evidence": [
+      {
+        "type": "REFUND_CONFIRMATION",
+        "razorpay_field": "refund_confirmation",
+        "critical": true,
+        "weight": 0.50,
+        "description": "Refund transaction reference, timestamp, and amount match"
+      },
+      {
+        "type": "REFUND_POLICY",
+        "razorpay_field": "refund_cancellation_policy",
+        "critical": false,
+        "weight": 0.25,
+        "description": "Merchant refund and return policy terms"
+      },
+      {
+        "type": "CUSTOMER_COMMUNICATION",
+        "razorpay_field": "customer_communication",
+        "critical": false,
+        "weight": 0.25,
+        "description": "Communication regarding refund request or rejection rationale"
+      }
+    ]
+  },
+  "1061": {
+    "category": "credit_not_processed",
+    "network": "upi_rupay",
+    "reason_description": "Credit Not Processed",
+    "required_evidence": [
+      {
+        "type": "REFUND_CONFIRMATION",
+        "razorpay_field": "refund_confirmation",
+        "critical": true,
+        "weight": 0.45,
+        "description": "Proof of refund generation matching the payment amount"
+      },
+      {
+        "type": "CUSTOMER_COMMUNICATION",
+        "razorpay_field": "customer_communication",
+        "critical": false,
+        "weight": 0.30,
+        "description": "Customer communication showing refund confirmation or status"
+      },
+      {
+        "type": "REFUND_POLICY",
+        "razorpay_field": "refund_cancellation_policy",
+        "critical": false,
+        "weight": 0.25,
+        "description": "Refund policies agreed during checkout"
+      }
+    ]
+  },
+  "13.3": {
+    "category": "not_as_described",
+    "network": "visa",
+    "reason_description": "Not as Described or Defective",
+    "required_evidence": [
+      {
+        "type": "PRODUCT_DESCRIPTION",
+        "razorpay_field": "billing_proof",
+        "critical": true,
+        "weight": 0.35,
+        "description": "Original catalog listing, images, and description of item sold"
+      },
+      {
+        "type": "PRODUCT_SPECIFICATION",
+        "razorpay_field": "billing_proof",
+        "critical": true,
+        "weight": 0.25,
+        "description": "Detailed technical or material specifications"
+      },
+      {
+        "type": "DELIVERY_CONFIRMATION",
+        "razorpay_field": "proof_of_service",
+        "critical": false,
+        "weight": 0.20,
+        "description": "Proof of fulfillment and delivery"
+      },
+      {
+        "type": "CUSTOMER_COMMUNICATION",
+        "razorpay_field": "customer_communication",
+        "critical": false,
+        "weight": 0.10,
+        "description": "Customer correspondence regarding product dissatisfaction"
+      },
+      {
+        "type": "TERMS_AND_CONDITIONS",
+        "razorpay_field": "term_and_conditions",
+        "critical": false,
+        "weight": 0.10,
+        "description": "Return and exchange policy terms"
+      }
+    ]
+  },
+  "13.7": {
+    "category": "cancelled_merchandise",
+    "network": "visa",
+    "reason_description": "Cancelled Merchandise/Services",
+    "required_evidence": [
+      {
+        "type": "CANCELLATION_POLICY",
+        "razorpay_field": "refund_cancellation_policy",
+        "critical": true,
+        "weight": 0.35,
+        "description": "Cancellation policy terms (e.g. cancellation window, deadlines)"
+      },
+      {
+        "type": "SHIPPING_PROOF",
+        "razorpay_field": "shipping_proof",
+        "critical": true,
+        "weight": 0.35,
+        "description": "Order processing and dispatch timestamp proving fulfillment before cancellation"
+      },
+      {
+        "type": "CUSTOMER_COMMUNICATION",
+        "razorpay_field": "customer_communication",
+        "critical": false,
+        "weight": 0.20,
+        "description": "Customer cancellation request timestamp logs"
+      },
+      {
+        "type": "TERMS_AND_CONDITIONS",
+        "razorpay_field": "term_and_conditions",
+        "critical": false,
+        "weight": 0.10,
+        "description": "General checkout terms & conditions"
+      }
+    ]
+  },
+  "10.4": {
+    "category": "unauthorized_fraud",
+    "network": "visa",
+    "reason_description": "Other Fraud – Card-Absent Environment",
+    "required_evidence": [
+      {
+        "type": "AUTHENTICATION_RECORD",
+        "razorpay_field": "access_activity_log",
+        "critical": true,
+        "weight": 0.35,
+        "description": "3D Secure (3DS) authentication status, OTP verification logs"
+      },
+      {
+        "type": "DEVICE_SIGNAL",
+        "razorpay_field": "access_activity_log",
+        "critical": false,
+        "weight": 0.20,
+        "description": "Device fingerprint, device ID match with customer history"
+      },
+      {
+        "type": "IP_SIGNAL",
+        "razorpay_field": "access_activity_log",
+        "critical": false,
+        "weight": 0.15,
+        "description": "IP address geolocation consistency"
+      },
+      {
+        "type": "DELIVERY_CONFIRMATION",
+        "razorpay_field": "shipping_proof",
+        "critical": false,
+        "weight": 0.15,
+        "description": "Proof of delivery to verified cardholder address"
+      },
+      {
+        "type": "INVOICE",
+        "razorpay_field": "billing_proof",
+        "critical": false,
+        "weight": 0.15,
+        "description": "Invoice showing customer details and billing information"
+      }
+    ]
+  }
+}
