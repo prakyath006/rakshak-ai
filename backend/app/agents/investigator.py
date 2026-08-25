@@ -232,6 +232,7 @@ class EvidenceInvestigator:
                     "direction": comm.get("direction"),
                     "subject": comm.get("subject"),
                     "message": comm.get("message"),
+                    "order_id": comm.get("order_id"),
                 },
                 timestamp=comm.get("timestamp"),
                 reliability=0.95,
