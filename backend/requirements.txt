@@ -1,0 +1,16 @@
+# Web framework
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+pydantic==2.9.2
+pydantic-settings==2.5.2
+
+# Config loading (backend/.env)
+python-dotenv==1.0.1
+
+# HTTP client — Razorpay Disputes API and the OpenRouter LLM endpoint
+requests==2.32.3
+
+# Reading the model artifacts that app/services/risk_store.py serves.
+# The API never trains or scores; ml/ does that offline and writes to artifacts/.
+pandas==2.2.3
+numpy==2.1.3
