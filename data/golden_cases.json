@@ -1,0 +1,1555 @@
+[
+  {
+    "case_id": "GOLDEN-01",
+    "title": "Strong delivery proof & customer acknowledgment",
+    "category": "goods_not_received",
+    "reason_code": "13.1",
+    "reason_description": "Merchandise/Services Not Received",
+    "expected_decision": "CONTEST",
+    "expected_strength": "HIGH",
+    "merchant": {
+      "merchant_id": "MERCH-001",
+      "name": "Apex Electronics India",
+      "industry": "Electronics",
+      "refund_policy": "Returns accepted within 7 days of delivery in original condition.",
+      "cancellation_policy": "Cancellations permitted prior to shipment dispatch.",
+      "terms_url": "https://apexelectronics.in/terms"
+    },
+    "customer": {
+      "customer_id": "CUS-1001",
+      "name": "Rohan Sharma",
+      "email": "rohan.sharma@example.com",
+      "phone": "+91-9876543210",
+      "city": "Bengaluru",
+      "country": "IN",
+      "dispute_history_count": 0
+    },
+    "product": {
+      "product_id": "PROD-2001",
+      "name": "Sony WH-1000XM5 Wireless Headphones",
+      "description": "Premium Noise Cancelling Headphones",
+      "specification": "Black, Bluetooth 5.2, 30hr battery",
+      "price": 48000.0,
+      "category": "Audio"
+    },
+    "order": {
+      "order_id": "ORD-3001",
+      "quantity": 1,
+      "order_amount": 48000.0,
+      "order_status": "delivered",
+      "created_at": "2026-08-18T10:00:00Z"
+    },
+    "payment": {
+      "payment_id": "pay_golden_001",
+      "amount": 48000.0,
+      "payment_method": "card",
+      "payment_status": "captured",
+      "card_network": "visa",
+      "payment_timestamp": "2026-08-18T10:05:00Z"
+    },
+    "shipment": {
+      "shipment_id": "SHIP-4001",
+      "carrier": "BlueDart Express",
+      "tracking_number": "BD-8899210",
+      "shipped_at": "2026-08-20T14:30:00Z",
+      "delivered_at": "2026-08-22T16:15:00Z",
+      "delivery_status": "delivered",
+      "delivery_address_city": "Bengaluru",
+      "delivery_address_match": true,
+      "items_shipped": 1
+    },
+    "communications": [
+      {
+        "communication_id": "COMM-5001",
+        "channel": "email",
+        "direction": "inbound",
+        "subject": "Order ORD-3001 Received",
+        "message": "Thanks, received it today. Working great!",
+        "timestamp": "2026-08-23T11:20:00Z"
+      }
+    ],
+    "refunds": [],
+    "dispute": {
+      "dispute_id": "disp_golden_001",
+      "amount": 48000.0,
+      "phase": "chargeback",
+      "status": "open",
+      "respond_by": "2026-09-05T00:21:36Z",
+      "customer_claim_text": "I did not receive the product ordered.",
+      "ground_truth": "contestable"
+    }
+  },
+  {
+    "case_id": "GOLDEN-02",
+    "title": "Missing proof of delivery (lost package)",
+    "category": "goods_not_received",
+    "reason_code": "1064",
+    "reason_description": "Goods/Services Not Received",
+    "expected_decision": "REVIEW",
+    "expected_strength": "LOW",
+    "merchant": {
+      "merchant_id": "MERCH-001",
+      "name": "Apex Electronics India",
+      "industry": "Electronics",
+      "refund_policy": "Returns accepted within 7 days.",
+      "cancellation_policy": "Cancellations permitted prior to shipment.",
+      "terms_url": "https://apexelectronics.in/terms"
+    },
+    "customer": {
+      "customer_id": "CUS-1002",
+      "name": "Priya Patel",
+      "email": "priya.p@example.com",
+      "phone": "+91-9876543211",
+      "city": "Mumbai",
+      "country": "IN",
+      "dispute_history_count": 0
+    },
+    "product": {
+      "product_id": "PROD-2002",
+      "name": "Logitech MX Master 3S Mouse",
+      "description": "Ergonomic Wireless Mouse",
+      "specification": "Graphite, 8K DPI sensor",
+      "price": 15000.0,
+      "category": "Accessories"
+    },
+    "order": {
+      "order_id": "ORD-3002",
+      "quantity": 1,
+      "order_amount": 15000.0,
+      "order_status": "shipped",
+      "created_at": "2026-08-15T09:00:00Z"
+    },
+    "payment": {
+      "payment_id": "pay_golden_002",
+      "amount": 15000.0,
+      "payment_method": "upi",
+      "payment_status": "captured",
+      "card_network": null,
+      "payment_timestamp": "2026-08-15T09:02:00Z"
+    },
+    "shipment": {
+      "shipment_id": "SHIP-4002",
+      "carrier": "Delhivery",
+      "tracking_number": "DEL-4432110",
+      "shipped_at": "2026-08-16T12:00:00Z",
+      "delivered_at": null,
+      "delivery_status": "in_transit",
+      "delivery_address_city": "Mumbai",
+      "delivery_address_match": true,
+      "items_shipped": 1
+    },
+    "communications": [
+      {
+        "communication_id": "COMM-5002",
+        "channel": "email",
+        "direction": "inbound",
+        "subject": "Where is my package?",
+        "message": "It has been 10 days and tracking is stuck. I never received it.",
+        "timestamp": "2026-08-25T14:00:00Z"
+      }
+    ],
+    "refunds": [],
+    "dispute": {
+      "dispute_id": "disp_golden_002",
+      "amount": 15000.0,
+      "phase": "chargeback",
+      "status": "open",
+      "respond_by": "2026-09-05T02:21:36Z",
+      "customer_claim_text": "I never received the item.",
+      "ground_truth": "ambiguous"
+    }
+  },
+  {
+    "case_id": "GOLDEN-03",
+    "title": "Clearly merchant fault (carrier lost, no refund)",
+    "category": "goods_not_received",
+    "reason_code": "13.1",
+    "reason_description": "Merchandise/Services Not Received",
+    "expected_decision": "DO_NOT_CONTEST",
+    "expected_strength": "LOW",
+    "merchant": {
+      "merchant_id": "MERCH-002",
+      "name": "StyleHub Fashion",
+      "industry": "Apparel",
+      "refund_policy": "Full refund on lost shipments.",
+      "cancellation_policy": "Free cancellation.",
+      "terms_url": "https://stylehub.in/terms"
+    },
+    "customer": {
+      "customer_id": "CUS-1003",
+      "name": "Amit Verma",
+      "email": "amit.v@example.com",
+      "phone": "+91-9876543212",
+      "city": "Delhi",
+      "country": "IN",
+      "dispute_history_count": 0
+    },
+    "product": {
+      "product_id": "PROD-2003",
+      "name": "Leather Jacket Premium",
+      "description": "Genuine leather biker jacket",
+      "specification": "Size L, Black",
+      "price": 8000.0,
+      "category": "Clothing"
+    },
+    "order": {
+      "order_id": "ORD-3003",
+      "quantity": 1,
+      "order_amount": 8000.0,
+      "order_status": "lost",
+      "created_at": "2026-08-10T11:00:00Z"
+    },
+    "payment": {
+      "payment_id": "pay_golden_003",
+      "amount": 8000.0,
+      "payment_method": "card",
+      "payment_status": "captured",
+      "card_network": "visa",
+      "payment_timestamp": "2026-08-10T11:05:00Z"
+    },
+    "shipment": {
+      "shipment_id": "SHIP-4003",
+      "carrier": "DTDC",
+      "tracking_number": "DTDC-992104",
+      "shipped_at": "2026-08-11T16:00:00Z",
+      "delivered_at": null,
+      "delivery_status": "lost",
+      "delivery_address_city": "Delhi",
+      "delivery_address_match": true,
+      "items_shipped": 1
+    },
+    "communications": [
+      {
+        "communication_id": "COMM-5003",
+        "channel": "email",
+        "direction": "outbound",
+        "subject": "Shipment Update",
+        "message": "We regret to inform you that courier has confirmed the package is lost.",
+        "timestamp": "2026-08-17T10:00:00Z"
+      }
+    ],
+    "refunds": [],
+    "dispute": {
+      "dispute_id": "disp_golden_003",
+      "amount": 8000.0,
+      "phase": "chargeback",
+      "status": "open",
+      "respond_by": "2026-09-05T11:21:36Z",
+      "customer_claim_text": "Goods were never delivered and refund was not provided.",
+      "ground_truth": "non_contestable"
+    }
+  },
+  {
+    "case_id": "GOLDEN-04",
+    "title": "Contradictory evidence (shipping address mismatch)",
+    "category": "goods_not_received",
+    "reason_code": "13.1",
+    "reason_description": "Merchandise/Services Not Received",
+    "expected_decision": "REVIEW",
+    "expected_strength": "MEDIUM",
+    "merchant": {
+      "merchant_id": "MERCH-001",
+      "name": "Apex Electronics India",
+      "industry": "Electronics",
+      "refund_policy": "7 days return policy.",
+      "cancellation_policy": "Before dispatch.",
+      "terms_url": "https://apexelectronics.in/terms"
+    },
+    "customer": {
+      "customer_id": "CUS-1004",
+      "name": "Sunita Rao",
+      "email": "sunita.rao@example.com",
+      "phone": "+91-9876543213",
+      "city": "Hyderabad",
+      "country": "IN",
+      "dispute_history_count": 0
+    },
+    "product": {
+      "product_id": "PROD-2004",
+      "name": "iPad 10th Gen 64GB",
+      "description": "Apple iPad 10.9 inch",
+      "specification": "Blue, Wi-Fi",
+      "price": 25000.0,
+      "category": "Tablets"
+    },
+    "order": {
+      "order_id": "ORD-3004",
+      "quantity": 1,
+      "order_amount": 25000.0,
+      "order_status": "delivered",
+      "created_at": "2026-08-12T14:00:00Z"
+    },
+    "payment": {
+      "payment_id": "pay_golden_004",
+      "amount": 25000.0,
+      "payment_method": "card",
+      "payment_status": "captured",
+      "card_network": "visa",
+      "payment_timestamp": "2026-08-12T14:03:00Z"
+    },
+    "shipment": {
+      "shipment_id": "SHIP-4004",
+      "carrier": "BlueDart Express",
+      "tracking_number": "BD-3321901",
+      "shipped_at": "2026-08-13T10:00:00Z",
+      "delivered_at": "2026-08-15T15:00:00Z",
+      "delivery_status": "delivered",
+      "delivery_address_city": "Pune",
+      "delivery_address_match": false,
+      "items_shipped": 1
+    },
+    "communications": [
+      {
+        "communication_id": "COMM-5004",
+        "channel": "email",
+        "direction": "inbound",
+        "subject": "Wrong address delivery",
+        "message": "Tracking says delivered in Pune, but my billing/shipping address is Hyderabad!",
+        "timestamp": "2026-08-16T09:00:00Z"
+      }
+    ],
+    "refunds": [],
+    "dispute": {
+      "dispute_id": "disp_golden_004",
+      "amount": 25000.0,
+      "phase": "chargeback",
+      "status": "open",
+      "respond_by": "2026-09-05T17:21:36Z",
+      "customer_claim_text": "I never received the item; tracking shows wrong destination city.",
+      "ground_truth": "ambiguous"
+    }
+  },
+  {
+    "case_id": "GOLDEN-05",
+    "title": "Customer acknowledged delivery in email before dispute",
+    "category": "goods_not_received",
+    "reason_code": "C08",
+    "reason_description": "Goods/Services Not Received",
+    "expected_decision": "CONTEST",
+    "expected_strength": "HIGH",
+    "merchant": {
+      "merchant_id": "MERCH-001",
+      "name": "Apex Electronics India",
+      "industry": "Electronics",
+      "refund_policy": "7 days return.",
+      "cancellation_policy": "Before dispatch.",
+      "terms_url": "https://apexelectronics.in/terms"
+    },
+    "customer": {
+      "customer_id": "CUS-1005",
+      "name": "Karan Singhania",
+      "email": "karan.s@example.com",
+      "phone": "+91-9876543214",
+      "city": "Mumbai",
+      "country": "IN",
+      "dispute_history_count": 1
+    },
+    "product": {
+      "product_id": "PROD-2005",
+      "name": "Keychron K2 Mechanical Keyboard",
+      "description": "Wireless Mechanical Keyboard",
+      "specification": "Gateron Brown, RGB Aluminum",
+      "price": 18000.0,
+      "category": "Accessories"
+    },
+    "order": {
+      "order_id": "ORD-3005",
+      "quantity": 1,
+      "order_amount": 18000.0,
+      "order_status": "delivered",
+      "created_at": "2026-08-01T10:00:00Z"
+    },
+    "payment": {
+      "payment_id": "pay_golden_005",
+      "amount": 18000.0,
+      "payment_method": "card",
+      "payment_status": "captured",
+      "card_network": "amex",
+      "payment_timestamp": "2026-08-01T10:05:00Z"
+    },
+    "shipment": {
+      "shipment_id": "SHIP-4005",
+      "carrier": "BlueDart Express",
+      "tracking_number": "BD-7711202",
+      "shipped_at": "2026-08-02T11:00:00Z",
+      "delivered_at": "2026-08-04T16:00:00Z",
+      "delivery_status": "delivered",
+      "delivery_address_city": "Mumbai",
+      "delivery_address_match": true,
+      "items_shipped": 1
+    },
+    "communications": [
+      {
+        "communication_id": "COMM-5005",
+        "channel": "email",
+        "direction": "inbound",
+        "subject": "Package arrived safely",
+        "message": "Package arrived today in great shape. Thank you!",
+        "timestamp": "2026-08-04T18:30:00Z"
+      }
+    ],
+    "refunds": [],
+    "dispute": {
+      "dispute_id": "disp_golden_005",
+      "amount": 18000.0,
+      "phase": "chargeback",
+      "status": "open",
+      "respond_by": "2026-09-06T13:21:36Z",
+      "customer_claim_text": "Merchandise not received.",
+      "ground_truth": "contestable"
+    }
+  },
+  {
+    "case_id": "GOLDEN-06",
+    "title": "Partial delivery (3 items ordered, 2 delivered, disputed full amount)",
+    "category": "goods_not_received",
+    "reason_code": "13.1",
+    "reason_description": "Merchandise/Services Not Received",
+    "expected_decision": "REVIEW",
+    "expected_strength": "MEDIUM",
+    "merchant": {
+      "merchant_id": "MERCH-002",
+      "name": "StyleHub Fashion",
+      "industry": "Apparel",
+      "refund_policy": "Full refund on missing items.",
+      "cancellation_policy": "Before dispatch.",
+      "terms_url": "https://stylehub.in/terms"
+    },
+    "customer": {
+      "customer_id": "CUS-1006",
+      "name": "Neha Gupta",
+      "email": "neha.g@example.com",
+      "phone": "+91-9876543215",
+      "city": "Chennai",
+      "country": "IN",
+      "dispute_history_count": 0
+    },
+    "product": {
+      "product_id": "PROD-2006",
+      "name": "Designer Silk Saree Set (Pack of 3)",
+      "description": "Pure Kanjivaram Silk Sarees",
+      "specification": "3 Pack Assorted Colors",
+      "price": 30000.0,
+      "category": "Clothing"
+    },
+    "order": {
+      "order_id": "ORD-3006",
+      "quantity": 3,
+      "order_amount": 30000.0,
+      "order_status": "partially_fulfilled",
+      "created_at": "2026-08-05T12:00:00Z"
+    },
+    "payment": {
+      "payment_id": "pay_golden_006",
+      "amount": 30000.0,
+      "payment_method": "card",
+      "payment_status": "captured",
+      "card_network": "visa",
+      "payment_timestamp": "2026-08-05T12:04:00Z"
+    },
+    "shipment": {
+      "shipment_id": "SHIP-4006",
+      "carrier": "BlueDart Express",
+      "tracking_number": "BD-6611009",
+      "shipped_at": "2026-08-06T15:00:00Z",
+      "delivered_at": "2026-08-09T14:00:00Z",
+      "delivery_status": "delivered",
+      "delivery_address_city": "Chennai",
+      "delivery_address_match": true,
+      "items_shipped": 2
+    },
+    "communications": [
+      {
+        "communication_id": "COMM-5006",
+        "channel": "email",
+        "direction": "inbound",
+        "subject": "Missing 1 saree from order ORD-3006",
+        "message": "I only received 2 sarees in the box instead of 3 ordered.",
+        "timestamp": "2026-08-10T10:00:00Z"
+      }
+    ],
+    "refunds": [],
+    "dispute": {
+      "dispute_id": "disp_golden_006",
+      "amount": 30000.0,
+      "phase": "chargeback",
+      "status": "open",
+      "respond_by": "2026-09-07T11:21:36Z",
+      "customer_claim_text": "Goods not received completely, requesting full chargeback.",
+      "ground_truth": "ambiguous"
+    }
+  },
+  {
+    "case_id": "GOLDEN-07",
+    "title": "Refund already processed successfully",
+    "category": "credit_not_processed",
+    "reason_code": "13.6",
+    "reason_description": "Credit Not Processed",
+    "expected_decision": "CONTEST",
+    "expected_strength": "HIGH",
+    "merchant": {
+      "merchant_id": "MERCH-001",
+      "name": "Apex Electronics India",
+      "industry": "Electronics",
+      "refund_policy": "Refunds processed within 5-7 business days to original payment method.",
+      "cancellation_policy": "Before dispatch.",
+      "terms_url": "https://apexelectronics.in/terms"
+    },
+    "customer": {
+      "customer_id": "CUS-1007",
+      "name": "Deepak Joshi",
+      "email": "deepak.j@example.com",
+      "phone": "+91-9876543216",
+      "city": "Ahmedabad",
+      "country": "IN",
+      "dispute_history_count": 0
+    },
+    "product": {
+      "product_id": "PROD-2007",
+      "name": "Samsung 27 inch 4K Monitor",
+      "description": "IPS HDR Monitor",
+      "specification": "4K UHD, 60Hz, USB-C",
+      "price": 12000.0,
+      "category": "Monitors"
+    },
+    "order": {
+      "order_id": "ORD-3007",
+      "quantity": 1,
+      "order_amount": 12000.0,
+      "order_status": "cancelled",
+      "cancelled_at": "2026-08-10T14:00:00Z",
+      "created_at": "2026-08-10T12:00:00Z"
+    },
+    "payment": {
+      "payment_id": "pay_golden_007",
+      "amount": 12000.0,
+      "payment_method": "card",
+      "payment_status": "refunded",
+      "card_network": "visa",
+      "payment_timestamp": "2026-08-10T12:05:00Z"
+    },
+    "shipment": null,
+    "communications": [
+      {
+        "communication_id": "COMM-5007",
+        "channel": "email",
+        "direction": "outbound",
+        "subject": "Refund Confirmation for ORD-3007",
+        "message": "Your refund of INR 12,000 has been processed to your card on 11-Aug-2026 (Ref: RFND-77881).",
+        "timestamp": "2026-08-11T10:00:00Z"
+      }
+    ],
+    "refunds": [
+      {
+        "refund_id": "rfnd_golden_007",
+        "amount": 12000.0,
+        "status": "processed",
+        "reason": "Order cancelled prior to shipment",
+        "created_at": "2026-08-11T09:30:00Z"
+      }
+    ],
+    "dispute": {
+      "dispute_id": "disp_golden_007",
+      "amount": 12000.0,
+      "phase": "chargeback",
+      "status": "open",
+      "respond_by": "2026-09-08T11:21:36Z",
+      "customer_claim_text": "Refund was promised but not credited to account.",
+      "ground_truth": "contestable"
+    }
+  },
+  {
+    "case_id": "GOLDEN-08",
+    "title": "Refund promised in writing but never processed",
+    "category": "credit_not_processed",
+    "reason_code": "13.6",
+    "reason_description": "Credit Not Processed",
+    "expected_decision": "DO_NOT_CONTEST",
+    "expected_strength": "LOW",
+    "merchant": {
+      "merchant_id": "MERCH-002",
+      "name": "StyleHub Fashion",
+      "industry": "Apparel",
+      "refund_policy": "Full refund upon approved return.",
+      "cancellation_policy": "Before dispatch.",
+      "terms_url": "https://stylehub.in/terms"
+    },
+    "customer": {
+      "customer_id": "CUS-1008",
+      "name": "Kavita Nair",
+      "email": "kavita.n@example.com",
+      "phone": "+91-9876543217",
+      "city": "Kochi",
+      "country": "IN",
+      "dispute_history_count": 0
+    },
+    "product": {
+      "product_id": "PROD-2008",
+      "name": "Embroidered Anarkali Suit",
+      "description": "Georgette Festive Wear",
+      "specification": "Size M, Teal",
+      "price": 9500.0,
+      "category": "Clothing"
+    },
+    "order": {
+      "order_id": "ORD-3008",
+      "quantity": 1,
+      "order_amount": 9500.0,
+      "order_status": "returned",
+      "created_at": "2026-08-01T15:00:00Z"
+    },
+    "payment": {
+      "payment_id": "pay_golden_008",
+      "amount": 9500.0,
+      "payment_method": "card",
+      "payment_status": "captured",
+      "card_network": "visa",
+      "payment_timestamp": "2026-08-01T15:05:00Z"
+    },
+    "shipment": {
+      "shipment_id": "SHIP-4008",
+      "carrier": "Delhivery",
+      "tracking_number": "DEL-990011",
+      "shipped_at": "2026-08-02T11:00:00Z",
+      "delivered_at": "2026-08-05T14:00:00Z",
+      "delivery_status": "returned",
+      "delivery_address_city": "Kochi",
+      "delivery_address_match": true,
+      "items_shipped": 1
+    },
+    "communications": [
+      {
+        "communication_id": "COMM-5008",
+        "channel": "email",
+        "direction": "outbound",
+        "subject": "Return Received",
+        "message": "We have received your returned item and will process your refund of INR 9,500 within 24 hours.",
+        "timestamp": "2026-08-08T10:00:00Z"
+      }
+    ],
+    "refunds": [],
+    "dispute": {
+      "dispute_id": "disp_golden_008",
+      "amount": 9500.0,
+      "phase": "chargeback",
+      "status": "open",
+      "respond_by": "2026-09-09T11:21:36Z",
+      "customer_claim_text": "Returned item as per agreement but refund was never credited.",
+      "ground_truth": "non_contestable"
+    }
+  },
+  {
+    "case_id": "GOLDEN-09",
+    "title": "Partial refund processed (disputed full original amount)",
+    "category": "credit_not_processed",
+    "reason_code": "1061",
+    "reason_description": "Credit Not Processed",
+    "expected_decision": "REVIEW",
+    "expected_strength": "MEDIUM",
+    "merchant": {
+      "merchant_id": "MERCH-001",
+      "name": "Apex Electronics India",
+      "industry": "Electronics",
+      "refund_policy": "Partial refund adjusted for restocking fee on opened boxes.",
+      "cancellation_policy": "Before dispatch.",
+      "terms_url": "https://apexelectronics.in/terms"
+    },
+    "customer": {
+      "customer_id": "CUS-1009",
+      "name": "Rahul Mehra",
+      "email": "rahul.m@example.com",
+      "phone": "+91-9876543218",
+      "city": "Chandigarh",
+      "country": "IN",
+      "dispute_history_count": 0
+    },
+    "product": {
+      "product_id": "PROD-2009",
+      "name": "DJI Mini 3 Drone Fly More Combo",
+      "description": "Ultralight Camera Drone",
+      "specification": "4K HDR Video",
+      "price": 20000.0,
+      "category": "Drones"
+    },
+    "order": {
+      "order_id": "ORD-3009",
+      "quantity": 1,
+      "order_amount": 20000.0,
+      "order_status": "returned",
+      "created_at": "2026-08-04T10:00:00Z"
+    },
+    "payment": {
+      "payment_id": "pay_golden_009",
+      "amount": 20000.0,
+      "payment_method": "upi",
+      "payment_status": "captured",
+      "card_network": null,
+      "payment_timestamp": "2026-08-04T10:03:00Z"
+    },
+    "shipment": null,
+    "communications": [
+      {
+        "communication_id": "COMM-5009",
+        "channel": "email",
+        "direction": "outbound",
+        "subject": "Partial Refund of INR 10,000",
+        "message": "A partial refund of INR 10,000 was processed as per the return agreement.",
+        "timestamp": "2026-08-08T12:00:00Z"
+      }
+    ],
+    "refunds": [
+      {
+        "refund_id": "rfnd_golden_009",
+        "amount": 10000.0,
+        "status": "processed",
+        "reason": "Partial return agreement",
+        "created_at": "2026-08-08T11:45:00Z"
+      }
+    ],
+    "dispute": {
+      "dispute_id": "disp_golden_009",
+      "amount": 20000.0,
+      "phase": "chargeback",
+      "status": "open",
+      "respond_by": "2026-09-05T00:21:36Z",
+      "customer_claim_text": "Refund was only partial, disputing full transaction value.",
+      "ground_truth": "ambiguous"
+    }
+  },
+  {
+    "case_id": "GOLDEN-10",
+    "title": "Refund initiated and currently pending in banking rails",
+    "category": "credit_not_processed",
+    "reason_code": "13.6",
+    "reason_description": "Credit Not Processed",
+    "expected_decision": "REVIEW",
+    "expected_strength": "MEDIUM",
+    "merchant": {
+      "merchant_id": "MERCH-001",
+      "name": "Apex Electronics India",
+      "industry": "Electronics",
+      "refund_policy": "Refunds settle in 5-7 business days.",
+      "cancellation_policy": "Before dispatch.",
+      "terms_url": "https://apexelectronics.in/terms"
+    },
+    "customer": {
+      "customer_id": "CUS-1010",
+      "name": "Siddharth Rao",
+      "email": "sid.rao@example.com",
+      "phone": "+91-9876543219",
+      "city": "Bengaluru",
+      "country": "IN",
+      "dispute_history_count": 0
+    },
+    "product": {
+      "product_id": "PROD-2010",
+      "name": "Crucial 2TB NVMe SSD",
+      "description": "PCIe Gen4 SSD",
+      "specification": "7000 MB/s Read Speed",
+      "price": 15000.0,
+      "category": "Storage"
+    },
+    "order": {
+      "order_id": "ORD-3010",
+      "quantity": 1,
+      "order_amount": 15000.0,
+      "order_status": "cancelled",
+      "cancelled_at": "2026-08-20T10:00:00Z",
+      "created_at": "2026-08-20T08:00:00Z"
+    },
+    "payment": {
+      "payment_id": "pay_golden_010",
+      "amount": 15000.0,
+      "payment_method": "card",
+      "payment_status": "captured",
+      "card_network": "visa",
+      "payment_timestamp": "2026-08-20T08:05:00Z"
+    },
+    "shipment": null,
+    "communications": [],
+    "refunds": [
+      {
+        "refund_id": "rfnd_golden_010",
+        "amount": 15000.0,
+        "status": "pending",
+        "reason": "Cancellation requested",
+        "created_at": "2026-08-21T14:00:00Z"
+      }
+    ],
+    "dispute": {
+      "dispute_id": "disp_golden_010",
+      "amount": 15000.0,
+      "phase": "chargeback",
+      "status": "open",
+      "respond_by": "2026-09-05T02:21:36Z",
+      "customer_claim_text": "Refund not received after cancelling.",
+      "ground_truth": "ambiguous"
+    }
+  },
+  {
+    "case_id": "GOLDEN-11",
+    "title": "Delivered product strictly matches catalog description and specs",
+    "category": "not_as_described",
+    "reason_code": "13.3",
+    "reason_description": "Not as Described or Defective",
+    "expected_decision": "CONTEST",
+    "expected_strength": "HIGH",
+    "merchant": {
+      "merchant_id": "MERCH-001",
+      "name": "Apex Electronics India",
+      "industry": "Electronics",
+      "refund_policy": "7 days return for unopened boxes.",
+      "cancellation_policy": "Before dispatch.",
+      "terms_url": "https://apexelectronics.in/terms"
+    },
+    "customer": {
+      "customer_id": "CUS-1011",
+      "name": "Manish Tiwari",
+      "email": "manish.t@example.com",
+      "phone": "+91-9876543220",
+      "city": "Indore",
+      "country": "IN",
+      "dispute_history_count": 0
+    },
+    "product": {
+      "product_id": "PROD-2011",
+      "name": "OnePlus 12R Smartphone (128 GB)",
+      "description": "OnePlus 12R 8GB RAM 128GB Storage Cool Blue",
+      "specification": "RAM: 8GB, Storage: 128GB UFS 3.1, Snapdragon 8 Gen 2",
+      "price": 35000.0,
+      "category": "Mobiles"
+    },
+    "order": {
+      "order_id": "ORD-3011",
+      "quantity": 1,
+      "order_amount": 35000.0,
+      "order_status": "delivered",
+      "created_at": "2026-08-08T10:00:00Z"
+    },
+    "payment": {
+      "payment_id": "pay_golden_011",
+      "amount": 35000.0,
+      "payment_method": "card",
+      "payment_status": "captured",
+      "card_network": "visa",
+      "payment_timestamp": "2026-08-08T10:04:00Z"
+    },
+    "shipment": {
+      "shipment_id": "SHIP-4011",
+      "carrier": "BlueDart Express",
+      "tracking_number": "BD-9911442",
+      "shipped_at": "2026-08-09T14:00:00Z",
+      "delivered_at": "2026-08-11T16:00:00Z",
+      "delivery_status": "delivered",
+      "delivery_address_city": "Indore",
+      "delivery_address_match": true,
+      "items_shipped": 1
+    },
+    "communications": [
+      {
+        "communication_id": "COMM-5011",
+        "channel": "email",
+        "direction": "inbound",
+        "subject": "Expected 256GB model",
+        "message": "I thought I was ordering the 256GB model for this price.",
+        "timestamp": "2026-08-12T09:30:00Z"
+      }
+    ],
+    "refunds": [],
+    "dispute": {
+      "dispute_id": "disp_golden_011",
+      "amount": 35000.0,
+      "phase": "chargeback",
+      "status": "open",
+      "respond_by": "2026-09-05T11:21:36Z",
+      "customer_claim_text": "Product not as described. Received 128GB instead of 256GB.",
+      "ground_truth": "contestable"
+    }
+  },
+  {
+    "case_id": "GOLDEN-12",
+    "title": "Delivered product genuinely differs from listing specification",
+    "category": "not_as_described",
+    "reason_code": "13.3",
+    "reason_description": "Not as Described or Defective",
+    "expected_decision": "DO_NOT_CONTEST",
+    "expected_strength": "LOW",
+    "merchant": {
+      "merchant_id": "MERCH-001",
+      "name": "Apex Electronics India",
+      "industry": "Electronics",
+      "refund_policy": "Full refund if item received differs from advertised listing.",
+      "cancellation_policy": "Before dispatch.",
+      "terms_url": "https://apexelectronics.in/terms"
+    },
+    "customer": {
+      "customer_id": "CUS-1012",
+      "name": "Ananya Sen",
+      "email": "ananya.s@example.com",
+      "phone": "+91-9876543221",
+      "city": "Kolkata",
+      "country": "IN",
+      "dispute_history_count": 0
+    },
+    "product": {
+      "product_id": "PROD-2012",
+      "name": "MacBook Air M2 (Advertised: 16GB / 512GB)",
+      "description": "Apple MacBook Air 13.6 inch M2 Chip 16GB RAM 512GB SSD",
+      "specification": "Advertised: 16GB Unified Memory, 512GB SSD Storage. Fulfilled: 8GB / 256GB base model.",
+      "price": 42000.0,
+      "category": "Laptops"
+    },
+    "order": {
+      "order_id": "ORD-3012",
+      "quantity": 1,
+      "order_amount": 42000.0,
+      "order_status": "delivered",
+      "created_at": "2026-08-02T11:00:00Z"
+    },
+    "payment": {
+      "payment_id": "pay_golden_012",
+      "amount": 42000.0,
+      "payment_method": "card",
+      "payment_status": "captured",
+      "card_network": "visa",
+      "payment_timestamp": "2026-08-02T11:05:00Z"
+    },
+    "shipment": {
+      "shipment_id": "SHIP-4012",
+      "carrier": "BlueDart Express",
+      "tracking_number": "BD-8800112",
+      "shipped_at": "2026-08-03T10:00:00Z",
+      "delivered_at": "2026-08-05T15:00:00Z",
+      "delivery_status": "delivered",
+      "delivery_address_city": "Kolkata",
+      "delivery_address_match": true,
+      "items_shipped": 1
+    },
+    "communications": [
+      {
+        "communication_id": "COMM-5012",
+        "channel": "email",
+        "direction": "inbound",
+        "subject": "Wrong specs received (8GB/256GB instead of 16GB/512GB)",
+        "message": "The box and system information clearly shows 8GB RAM 256GB SSD, but invoice/listing said 16GB.",
+        "timestamp": "2026-08-06T12:00:00Z"
+      }
+    ],
+    "refunds": [],
+    "dispute": {
+      "dispute_id": "disp_golden_012",
+      "amount": 42000.0,
+      "phase": "chargeback",
+      "status": "open",
+      "respond_by": "2026-09-05T17:21:36Z",
+      "customer_claim_text": "Item delivered has lower configuration than purchased.",
+      "ground_truth": "non_contestable"
+    }
+  },
+  {
+    "case_id": "GOLDEN-13",
+    "title": "Ambiguous listing specification with customer processor complaint",
+    "category": "not_as_described",
+    "reason_code": "13.3",
+    "reason_description": "Not as Described or Defective",
+    "expected_decision": "REVIEW",
+    "expected_strength": "MEDIUM",
+    "merchant": {
+      "merchant_id": "MERCH-001",
+      "name": "Apex Electronics India",
+      "industry": "Electronics",
+      "refund_policy": "7 days return policy.",
+      "cancellation_policy": "Before dispatch.",
+      "terms_url": "https://apexelectronics.in/terms"
+    },
+    "customer": {
+      "customer_id": "CUS-1013",
+      "name": "Vikram Sethi",
+      "email": "vikram.s@example.com",
+      "phone": "+91-9876543222",
+      "city": "Gurugram",
+      "country": "IN",
+      "dispute_history_count": 0
+    },
+    "product": {
+      "product_id": "PROD-2013",
+      "name": "Premium Gaming Laptop Pro",
+      "description": "High Performance Gaming Laptop with Dedicated Graphics",
+      "specification": "Generic Quad Core Processor, 16GB RAM, RTX Graphics (Exact CPU model omitted in catalog)",
+      "price": 55000.0,
+      "category": "Laptops"
+    },
+    "order": {
+      "order_id": "ORD-3013",
+      "quantity": 1,
+      "order_amount": 55000.0,
+      "order_status": "delivered",
+      "created_at": "2026-08-01T14:00:00Z"
+    },
+    "payment": {
+      "payment_id": "pay_golden_013",
+      "amount": 55000.0,
+      "payment_method": "card",
+      "payment_status": "captured",
+      "card_network": "visa",
+      "payment_timestamp": "2026-08-01T14:05:00Z"
+    },
+    "shipment": {
+      "shipment_id": "SHIP-4013",
+      "carrier": "BlueDart Express",
+      "tracking_number": "BD-7700223",
+      "shipped_at": "2026-08-02T10:00:00Z",
+      "delivered_at": "2026-08-04T12:00:00Z",
+      "delivery_status": "delivered",
+      "delivery_address_city": "Gurugram",
+      "delivery_address_match": true,
+      "items_shipped": 1
+    },
+    "communications": [
+      {
+        "communication_id": "COMM-5013",
+        "channel": "email",
+        "direction": "inbound",
+        "subject": "Processor variant issue",
+        "message": "Product listing did not specify Intel i5 vs i7. I received i5 version.",
+        "timestamp": "2026-08-05T10:00:00Z"
+      }
+    ],
+    "refunds": [],
+    "dispute": {
+      "dispute_id": "disp_golden_013",
+      "amount": 55000.0,
+      "phase": "chargeback",
+      "status": "open",
+      "respond_by": "2026-09-06T13:21:36Z",
+      "customer_claim_text": "Product specification ambiguous in catalog.",
+      "ground_truth": "ambiguous"
+    }
+  },
+  {
+    "case_id": "GOLDEN-14",
+    "title": "Cancellation requested after shipment dispatch",
+    "category": "cancelled_merchandise",
+    "reason_code": "13.7",
+    "reason_description": "Cancelled Merchandise/Services",
+    "expected_decision": "REVIEW",
+    "expected_strength": "MEDIUM",
+    "merchant": {
+      "merchant_id": "MERCH-001",
+      "name": "Apex Electronics India",
+      "industry": "Electronics",
+      "refund_policy": "Items shipped before cancellation must be returned for refund.",
+      "cancellation_policy": "Cancellation is only valid prior to shipment dispatch. Once in transit, customer must initiate standard return.",
+      "terms_url": "https://apexelectronics.in/terms"
+    },
+    "customer": {
+      "customer_id": "CUS-1014",
+      "name": "Ritu Menon",
+      "email": "ritu.m@example.com",
+      "phone": "+91-9876543223",
+      "city": "Chennai",
+      "country": "IN",
+      "dispute_history_count": 0
+    },
+    "product": {
+      "product_id": "PROD-2014",
+      "name": "Bose SoundLink Flex Bluetooth Speaker",
+      "description": "Portable Waterproof Speaker",
+      "specification": "Black, IP67 rating",
+      "price": 16000.0,
+      "category": "Audio"
+    },
+    "order": {
+      "order_id": "ORD-3014",
+      "quantity": 1,
+      "order_amount": 16000.0,
+      "order_status": "delivered",
+      "cancelled_at": "2026-08-15T18:00:00Z",
+      "created_at": "2026-08-14T10:00:00Z"
+    },
+    "payment": {
+      "payment_id": "pay_golden_014",
+      "amount": 16000.0,
+      "payment_method": "card",
+      "payment_status": "captured",
+      "card_network": "visa",
+      "payment_timestamp": "2026-08-14T10:04:00Z"
+    },
+    "shipment": {
+      "shipment_id": "SHIP-4014",
+      "carrier": "BlueDart Express",
+      "tracking_number": "BD-5511002",
+      "shipped_at": "2026-08-15T11:00:00Z",
+      "delivered_at": "2026-08-17T14:00:00Z",
+      "delivery_status": "delivered",
+      "delivery_address_city": "Chennai",
+      "delivery_address_match": true,
+      "items_shipped": 1
+    },
+    "communications": [
+      {
+        "communication_id": "COMM-5014",
+        "channel": "email",
+        "direction": "inbound",
+        "subject": "Cancel Order ORD-3014",
+        "message": "Please cancel my order. (Sent at 6:00 PM after tracking showed dispatch at 11:00 AM)",
+        "timestamp": "2026-08-15T18:00:00Z"
+      }
+    ],
+    "refunds": [],
+    "dispute": {
+      "dispute_id": "disp_golden_014",
+      "amount": 16000.0,
+      "phase": "chargeback",
+      "status": "open",
+      "respond_by": "2026-09-07T11:21:36Z",
+      "customer_claim_text": "Charged for order that was cancelled.",
+      "ground_truth": "ambiguous"
+    }
+  },
+  {
+    "case_id": "GOLDEN-15",
+    "title": "Cancellation before fulfillment, no shipment created, no refund issued",
+    "category": "cancelled_merchandise",
+    "reason_code": "13.7",
+    "reason_description": "Cancelled Merchandise/Services",
+    "expected_decision": "DO_NOT_CONTEST",
+    "expected_strength": "LOW",
+    "merchant": {
+      "merchant_id": "MERCH-002",
+      "name": "StyleHub Fashion",
+      "industry": "Apparel",
+      "refund_policy": "Full refund on cancelled orders.",
+      "cancellation_policy": "Free cancellation prior to fulfillment.",
+      "terms_url": "https://stylehub.in/terms"
+    },
+    "customer": {
+      "customer_id": "CUS-1015",
+      "name": "Gaurav Kapoor",
+      "email": "gaurav.k@example.com",
+      "phone": "+91-9876543224",
+      "city": "Jaipur",
+      "country": "IN",
+      "dispute_history_count": 0
+    },
+    "product": {
+      "product_id": "PROD-2015",
+      "name": "Handmade Leather Boots",
+      "description": "Classic Chelsea Boots",
+      "specification": "Size 9 UK, Tan",
+      "price": 7500.0,
+      "category": "Footwear"
+    },
+    "order": {
+      "order_id": "ORD-3015",
+      "quantity": 1,
+      "order_amount": 7500.0,
+      "order_status": "cancelled",
+      "cancelled_at": "2026-08-10T12:00:00Z",
+      "created_at": "2026-08-10T10:00:00Z"
+    },
+    "payment": {
+      "payment_id": "pay_golden_015",
+      "amount": 7500.0,
+      "payment_method": "card",
+      "payment_status": "captured",
+      "card_network": "visa",
+      "payment_timestamp": "2026-08-10T10:05:00Z"
+    },
+    "shipment": null,
+    "communications": [
+      {
+        "communication_id": "COMM-5015",
+        "channel": "email",
+        "direction": "inbound",
+        "subject": "Cancellation Request",
+        "message": "I would like to cancel order ORD-3015.",
+        "timestamp": "2026-08-10T11:45:00Z"
+      }
+    ],
+    "refunds": [],
+    "dispute": {
+      "dispute_id": "disp_golden_015",
+      "amount": 7500.0,
+      "phase": "chargeback",
+      "status": "open",
+      "respond_by": "2026-09-08T11:21:36Z",
+      "customer_claim_text": "Order was cancelled within 2 hours of placement before dispatch, but money was not refunded.",
+      "ground_truth": "non_contestable"
+    }
+  },
+  {
+    "case_id": "GOLDEN-16",
+    "title": "Customer cancelled within valid window, merchant shipped anyway in violation of policy",
+    "category": "cancelled_merchandise",
+    "reason_code": "13.7",
+    "reason_description": "Cancelled Merchandise/Services",
+    "expected_decision": "DO_NOT_CONTEST",
+    "expected_strength": "LOW",
+    "merchant": {
+      "merchant_id": "MERCH-002",
+      "name": "StyleHub Fashion",
+      "industry": "Apparel",
+      "refund_policy": "Full refund on policy-compliant cancellations.",
+      "cancellation_policy": "Cancellations allowed within 24 hours of order placement.",
+      "terms_url": "https://stylehub.in/terms"
+    },
+    "customer": {
+      "customer_id": "CUS-1016",
+      "name": "Swati Deshmukh",
+      "email": "swati.d@example.com",
+      "phone": "+91-9876543225",
+      "city": "Nagpur",
+      "country": "IN",
+      "dispute_history_count": 0
+    },
+    "product": {
+      "product_id": "PROD-2016",
+      "name": "Banarasi Dupatta & Kurti Combo",
+      "description": "Traditional Party Wear",
+      "specification": "Magenta, Free Size",
+      "price": 11000.0,
+      "category": "Clothing"
+    },
+    "order": {
+      "order_id": "ORD-3016",
+      "quantity": 1,
+      "order_amount": 11000.0,
+      "order_status": "cancelled",
+      "cancelled_at": "2026-08-05T14:00:00Z",
+      "created_at": "2026-08-05T09:00:00Z"
+    },
+    "payment": {
+      "payment_id": "pay_golden_016",
+      "amount": 11000.0,
+      "payment_method": "card",
+      "payment_status": "captured",
+      "card_network": "visa",
+      "payment_timestamp": "2026-08-05T09:05:00Z"
+    },
+    "shipment": {
+      "shipment_id": "SHIP-4016",
+      "carrier": "Delhivery",
+      "tracking_number": "DEL-339910",
+      "shipped_at": "2026-08-07T10:00:00Z",
+      "delivered_at": "2026-08-10T14:00:00Z",
+      "delivery_status": "delivered",
+      "delivery_address_city": "Nagpur",
+      "delivery_address_match": true,
+      "items_shipped": 1
+    },
+    "communications": [
+      {
+        "communication_id": "COMM-5016",
+        "channel": "email",
+        "direction": "inbound",
+        "subject": "Cancellation within 5 hours",
+        "message": "Cancelling my order as per your 24hr cancellation policy.",
+        "timestamp": "2026-08-05T14:00:00Z"
+      }
+    ],
+    "refunds": [],
+    "dispute": {
+      "dispute_id": "disp_golden_016",
+      "amount": 11000.0,
+      "phase": "chargeback",
+      "status": "open",
+      "respond_by": "2026-09-09T11:21:36Z",
+      "customer_claim_text": "I cancelled within 24h policy window, merchant shipped anyway.",
+      "ground_truth": "non_contestable"
+    }
+  },
+  {
+    "case_id": "GOLDEN-17",
+    "title": "Strong 3DS authentication with known device and IP history",
+    "category": "unauthorized_fraud",
+    "reason_code": "10.4",
+    "reason_description": "Other Fraud \u2013 Card-Absent Environment",
+    "expected_decision": "REVIEW",
+    "expected_strength": "HIGH",
+    "merchant": {
+      "merchant_id": "MERCH-001",
+      "name": "Apex Electronics India",
+      "industry": "Electronics",
+      "refund_policy": "7 days return.",
+      "cancellation_policy": "Before dispatch.",
+      "terms_url": "https://apexelectronics.in/terms"
+    },
+    "customer": {
+      "customer_id": "CUS-1017",
+      "name": "Arjun Nambiar",
+      "email": "arjun.n@example.com",
+      "phone": "+91-9876543226",
+      "city": "Thiruvananthapuram",
+      "country": "IN",
+      "dispute_history_count": 0
+    },
+    "product": {
+      "product_id": "PROD-2017",
+      "name": "Kindle Paperwhite Signature Edition",
+      "description": "32GB Wireless Charging e-Reader",
+      "specification": "6.8 inch display, 300 ppi",
+      "price": 22000.0,
+      "category": "e-Readers"
+    },
+    "order": {
+      "order_id": "ORD-3017",
+      "quantity": 1,
+      "order_amount": 22000.0,
+      "order_status": "delivered",
+      "created_at": "2026-08-12T10:00:00Z"
+    },
+    "payment": {
+      "payment_id": "pay_golden_017",
+      "amount": 22000.0,
+      "payment_method": "card",
+      "payment_status": "captured",
+      "card_network": "visa",
+      "payment_timestamp": "2026-08-12T10:05:00Z"
+    },
+    "shipment": {
+      "shipment_id": "SHIP-4017",
+      "carrier": "BlueDart Express",
+      "tracking_number": "BD-4400119",
+      "shipped_at": "2026-08-13T10:00:00Z",
+      "delivered_at": "2026-08-15T16:00:00Z",
+      "delivery_status": "delivered",
+      "delivery_address_city": "Thiruvananthapuram",
+      "delivery_address_match": true,
+      "items_shipped": 1
+    },
+    "communications": [],
+    "refunds": [],
+    "dispute": {
+      "dispute_id": "disp_golden_017",
+      "amount": 22000.0,
+      "phase": "fraud",
+      "status": "open",
+      "respond_by": "2026-09-05T00:21:36Z",
+      "customer_claim_text": "I did not recognize or authorize this transaction on my credit card statement.",
+      "ground_truth": "contestable"
+    }
+  },
+  {
+    "case_id": "GOLDEN-18",
+    "title": "Strong fraud anomaly (new device, foreign IP, no customer history)",
+    "category": "unauthorized_fraud",
+    "reason_code": "10.4",
+    "reason_description": "Other Fraud \u2013 Card-Absent Environment",
+    "expected_decision": "REVIEW",
+    "expected_strength": "LOW",
+    "merchant": {
+      "merchant_id": "MERCH-001",
+      "name": "Apex Electronics India",
+      "industry": "Electronics",
+      "refund_policy": "7 days return.",
+      "cancellation_policy": "Before dispatch.",
+      "terms_url": "https://apexelectronics.in/terms"
+    },
+    "customer": {
+      "customer_id": "CUS-1018",
+      "name": "Sanjay Dutt",
+      "email": "sanjay.unknown@tempmail.com",
+      "phone": "+91-9876543227",
+      "city": "Mumbai",
+      "country": "IN",
+      "dispute_history_count": 3
+    },
+    "product": {
+      "product_id": "PROD-2018",
+      "name": "iPhone 15 Pro Max 1TB",
+      "description": "Natural Titanium Smartphone",
+      "specification": "A17 Pro chip, 1TB",
+      "price": 68000.0,
+      "category": "Mobiles"
+    },
+    "order": {
+      "order_id": "ORD-3018",
+      "quantity": 1,
+      "order_amount": 68000.0,
+      "order_status": "delivered",
+      "created_at": "2026-08-10T03:15:00Z"
+    },
+    "payment": {
+      "payment_id": "pay_golden_018",
+      "amount": 68000.0,
+      "payment_method": "card",
+      "payment_status": "captured",
+      "card_network": "visa",
+      "payment_timestamp": "2026-08-10T03:18:00Z"
+    },
+    "shipment": {
+      "shipment_id": "SHIP-4018",
+      "carrier": "BlueDart Express",
+      "tracking_number": "BD-3300119",
+      "shipped_at": "2026-08-10T09:00:00Z",
+      "delivered_at": "2026-08-11T18:00:00Z",
+      "delivery_status": "delivered",
+      "delivery_address_city": "Goa",
+      "delivery_address_match": false,
+      "items_shipped": 1
+    },
+    "communications": [],
+    "refunds": [],
+    "dispute": {
+      "dispute_id": "disp_golden_018",
+      "amount": 68000.0,
+      "phase": "fraud",
+      "status": "open",
+      "respond_by": "2026-09-05T02:21:36Z",
+      "customer_claim_text": "Card compromised, unauthorized international charge.",
+      "ground_truth": "ambiguous"
+    }
+  },
+  {
+    "case_id": "GOLDEN-19",
+    "title": "Fraud claim where customer verified identity and order via email",
+    "category": "unauthorized_fraud",
+    "reason_code": "10.4",
+    "reason_description": "Other Fraud \u2013 Card-Absent Environment",
+    "expected_decision": "REVIEW",
+    "expected_strength": "HIGH",
+    "merchant": {
+      "merchant_id": "MERCH-001",
+      "name": "Apex Electronics India",
+      "industry": "Electronics",
+      "refund_policy": "7 days return.",
+      "cancellation_policy": "Before dispatch.",
+      "terms_url": "https://apexelectronics.in/terms"
+    },
+    "customer": {
+      "customer_id": "CUS-1019",
+      "name": "Rajesh Khanna",
+      "email": "rajesh.k@example.com",
+      "phone": "+91-9876543228",
+      "city": "Lucknow",
+      "country": "IN",
+      "dispute_history_count": 0
+    },
+    "product": {
+      "product_id": "PROD-2019",
+      "name": "GoPro HERO12 Black Creator Edition",
+      "description": "5.3K Action Camera with Volta grip",
+      "specification": "Includes Media Mod and Light Mod",
+      "price": 34000.0,
+      "category": "Cameras"
+    },
+    "order": {
+      "order_id": "ORD-3019",
+      "quantity": 1,
+      "order_amount": 34000.0,
+      "order_status": "delivered",
+      "created_at": "2026-08-07T11:00:00Z"
+    },
+    "payment": {
+      "payment_id": "pay_golden_019",
+      "amount": 34000.0,
+      "payment_method": "card",
+      "payment_status": "captured",
+      "card_network": "visa",
+      "payment_timestamp": "2026-08-07T11:05:00Z"
+    },
+    "shipment": {
+      "shipment_id": "SHIP-4019",
+      "carrier": "BlueDart Express",
+      "tracking_number": "BD-2211904",
+      "shipped_at": "2026-08-08T10:00:00Z",
+      "delivered_at": "2026-08-10T14:00:00Z",
+      "delivery_status": "delivered",
+      "delivery_address_city": "Lucknow",
+      "delivery_address_match": true,
+      "items_shipped": 1
+    },
+    "communications": [
+      {
+        "communication_id": "COMM-5019",
+        "channel": "email",
+        "direction": "inbound",
+        "subject": "Confirmation of high-value order",
+        "message": "Yes, I placed this order for the GoPro and confirmed the delivery address.",
+        "timestamp": "2026-08-07T12:00:00Z"
+      }
+    ],
+    "refunds": [],
+    "dispute": {
+      "dispute_id": "disp_golden_019",
+      "amount": 34000.0,
+      "phase": "fraud",
+      "status": "open",
+      "respond_by": "2026-09-05T11:21:36Z",
+      "customer_claim_text": "Unauthorized transaction charged to my card.",
+      "ground_truth": "contestable"
+    }
+  },
+  {
+    "case_id": "GOLDEN-20",
+    "title": "Suspicious transaction with failed attempts and missing customer auth",
+    "category": "unauthorized_fraud",
+    "reason_code": "10.4",
+    "reason_description": "Other Fraud \u2013 Card-Absent Environment",
+    "expected_decision": "REVIEW",
+    "expected_strength": "LOW",
+    "merchant": {
+      "merchant_id": "MERCH-001",
+      "name": "Apex Electronics India",
+      "industry": "Electronics",
+      "refund_policy": "7 days return.",
+      "cancellation_policy": "Before dispatch.",
+      "terms_url": "https://apexelectronics.in/terms"
+    },
+    "customer": {
+      "customer_id": "CUS-1020",
+      "name": "Unknown User",
+      "email": "user991@disposable.org",
+      "phone": "+91-9876543229",
+      "city": "Patna",
+      "country": "IN",
+      "dispute_history_count": 5
+    },
+    "product": {
+      "product_id": "PROD-2020",
+      "name": "Apple Watch Ultra 2 GPS + Cellular",
+      "description": "49mm Titanium Case with Trail Loop",
+      "specification": "S9 SiP, 3000 nits display",
+      "price": 50000.0,
+      "category": "Wearables"
+    },
+    "order": {
+      "order_id": "ORD-3020",
+      "quantity": 1,
+      "order_amount": 50000.0,
+      "order_status": "delivered",
+      "created_at": "2026-08-01T02:00:00Z"
+    },
+    "payment": {
+      "payment_id": "pay_golden_020",
+      "amount": 50000.0,
+      "payment_method": "card",
+      "payment_status": "captured",
+      "card_network": "visa",
+      "payment_timestamp": "2026-08-01T02:05:00Z"
+    },
+    "shipment": {
+      "shipment_id": "SHIP-4020",
+      "carrier": "BlueDart Express",
+      "tracking_number": "BD-1100992",
+      "shipped_at": "2026-08-01T10:00:00Z",
+      "delivered_at": "2026-08-03T17:00:00Z",
+      "delivery_status": "delivered",
+      "delivery_address_city": "Ranchi",
+      "delivery_address_match": false,
+      "items_shipped": 1
+    },
+    "communications": [],
+    "refunds": [],
+    "dispute": {
+      "dispute_id": "disp_golden_020",
+      "amount": 50000.0,
+      "phase": "fraud",
+      "status": "open",
+      "respond_by": "2026-09-05T17:21:36Z",
+      "customer_claim_text": "Stolen card used at 2 AM without cardholder authorization.",
+      "ground_truth": "ambiguous"
+    }
+  }
+]
