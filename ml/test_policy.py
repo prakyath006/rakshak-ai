@@ -200,9 +200,14 @@ def test_sensitivity_rejects_unknown_fields():
 # ---------------------------------------------------------------------------
 # VAMP portfolio layer
 # ---------------------------------------------------------------------------
-def test_thresholds_are_flagged_unverified_by_default():
-    """A placeholder must never be mistaken for a cited figure."""
-    assert ThresholdTable().verified is False
+def test_thresholds_are_verified_against_visa_fact_sheet():
+    """Defaults are sourced from Visa's VAMP fact sheet, effective 1 June 2025."""
+    t = ThresholdTable()
+    assert t.verified is True
+    assert "Visa Acquirer Monitoring Program" in t.source
+    # An overridden source that starts with UNVERIFIED must flag as such.
+    t2 = ThresholdTable(source="UNVERIFIED — placeholder")
+    assert t2.verified is False
 
 
 def test_bands_classify_by_ratio():

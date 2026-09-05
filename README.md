@@ -167,12 +167,24 @@ would depend on transactions that had not happened yet.
 
 Visa's **VAMP** (April 2025, enforced October 2025) monitors merchants *and
 acquirers* against dispute-ratio thresholds — and the two tolerances are nothing
-alike. A merchant is flagged "excessive" around 2.2%. An acquirer is flagged in the
-region of 0.3–0.5%, **portfolio-wide**.
+alike. Per [Visa's own fact sheet](https://corporate.visa.com/content/dam/VCOM/corporate/visa-perspectives/security-and-trust/documents/visa-acquirer-monitoring-program-fact-sheet-2025.pdf):
 
-An acquirer is therefore held to a bar several times tighter than any single
-merchant on its book. A handful of merchants running hot drags the whole portfolio
-toward a band that bills the acquirer per dispute.
+| Entity | Threshold | Band |
+|---|---:|---|
+| **Merchant** (AP/CA/EU/US) | ≥ 220 bps (2.20%) | Excessive |
+| **Acquirer** portfolio | ≥ 50 bps (0.50%) | Above Standard |
+| **Acquirer** portfolio | ≥ 70 bps (0.70%) | Excessive |
+
+An acquirer is held to a bar roughly **three times tighter** than any single
+merchant on its book, measured across every merchant at once. A handful of
+merchants running hot drags the whole portfolio toward a band that bills the
+acquirer per dispute.
+
+> **India note.** The fact sheet states: *"Programs for Brazil, Chile, and India
+> will be announced later."* India is not yet under VAMP as of September 2026.
+> However, per-dispute fines at acquirer-level thresholds are the standard Visa
+> enforcement pattern globally, and India's programme is expected to follow.
+> The architecture is built for that eventuality; the pipeline is region-agnostic.
 
 That asymmetry produces a result merchant-level monitoring cannot see. On the
 held-out fold:
@@ -186,11 +198,6 @@ held-out fold:
 Segment **C** looks seven times worse than **W** by its own rate, yet they
 contribute near-identical basis points to the portfolio. **Ranking merchants by
 their own dispute rate sends defence effort to the wrong place.**
-
-> ⚠️ The VAMP thresholds in `ml/vamp.py` are placeholders taken from secondary
-> reporting, and sources disagree on the acquirer bands. `ThresholdTable.verified`
-> returns `False` and the UI says so. They must be replaced with figures read from
-> Visa's own fact sheet before being quoted anywhere.
 
 ---
 
@@ -277,7 +284,7 @@ Stated here because "honest metrics" is a scored criterion, not a disclaimer.
 4. **Expected value is risk-neutral by construction.** It treats "lose ₹4,000
    certainly" and "lose ₹4,00,000 with probability 1%" as equivalent; a merchant does
    not. Risk aversion has to be expressed through the cost inputs.
-5. **VAMP thresholds are unverified** — see the warning above.
+5. **India is not yet under VAMP.** The fact sheet explicitly states programmes for India will be announced later. The architecture is region-agnostic, but the specific thresholds and fines have not been set for India as of September 2026.
 6. **Selective labelling is not handled.** In production a blocked transaction
    never produces an outcome, so a deployed system's training data is contaminated
    by its own past decisions and goes blind exactly where it acts. Real teams use

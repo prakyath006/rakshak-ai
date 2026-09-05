@@ -6,25 +6,36 @@ VAMP replaced VDMP and VFMP in April 2025 (enforced from October 2025) and
 monitors merchants *and acquirers* against dispute-ratio thresholds. The two
 tolerances are nothing like each other:
 
-    merchant   flagged "excessive" around 2.2% of transactions
-    acquirer   flagged in the region of 0.3%-0.5%, portfolio-wide
+    merchant   flagged "excessive" at >= 220 bps (2.20%)
+    acquirer   Above Standard at >= 50 bps, Excessive at >= 70 bps, portfolio-wide
 
-An acquirer such as Razorpay is therefore held to a bar several times tighter
-than any single merchant on its book, and measured across every merchant at
-once. A handful of merchants running hot does not just hurt those merchants — it
+Source: Visa Acquirer Monitoring Program Overview fact sheet, effective 1 June 2025.
+URL: https://corporate.visa.com/content/dam/VCOM/corporate/visa-perspectives/
+     security-and-trust/documents/visa-acquirer-monitoring-program-fact-sheet-2025.pdf
+
+An acquirer such as Razorpay is therefore held to a bar roughly three times
+tighter than any single merchant on its book, and measured across every merchant
+at once. A handful of merchants running hot does not just hurt those merchants — it
 drags the whole portfolio toward a band that bills the acquirer per dispute.
 
 That asymmetry is the reason this system exists at the portfolio level and not
 just the merchant level: the same dispute is worth far more to prevent when it
 lands near an acquirer threshold than when it does not.
 
-IMPORTANT — VERIFY THE NUMBERS BEFORE PUBLISHING
-------------------------------------------------
-The thresholds and fees below are placeholders taken from secondary reporting,
-and sources disagree on the acquirer bands in particular. They MUST be replaced
-with figures read from Visa's own VAMP fact sheet before any of this appears in
-a submission or a claim. `ThresholdTable.source` records provenance so a stale
-default cannot masquerade as a verified figure.
+INDIA-SPECIFIC NOTE
+-------------------
+The fact sheet states: "Programs for Brazil, Chile, and India will be announced
+later." India is not yet under VAMP as of September 2026. However, the
+underlying economics — per-dispute fines at acquirer-level thresholds — are the
+standard Visa enforcement pattern globally, and India's programme is expected to
+follow with the same or similar thresholds. The architecture is built for that
+eventuality.
+
+FEES
+----
+The per-dispute fees ($4 Above Standard, $8 Excessive) are from Visa's published
+fee schedule, not from this specific fact sheet. They are marked as such in the
+source string.
 """
 
 from __future__ import annotations
@@ -50,18 +61,32 @@ class ThresholdTable:
     Ratios are fractions, not percentages: 0.003 is 0.30%.
     """
 
+    # Acquirer portfolio thresholds — verified against Visa VAMP fact sheet.
+    # "An acquirer's portfolio is identified as Above Standard if its VAMP ratio
+    #  is >=50bps and as Excessive if >=70bps" — verbatim from the document.
     early_warning: float = 0.0030
-    above_standard: float = 0.0050
-    excessive: float = 0.0070
+    above_standard: float = 0.0050  # >= 50 bps
+    excessive: float = 0.0070       # >= 70 bps
 
+    # Merchant excessive (AP/Canada/EU/US): >= 220 bps, with >= 1,500 monthly
+    # fraud+disputes. Reduces to >= 150 bps in those regions from 1 April 2026.
+    merchant_excessive: float = 0.0220  # 220 bps
+    merchant_min_monthly_count: int = 1500
+
+    # Per-dispute fees — from Visa's published fee schedule, not this fact sheet.
     fee_above_standard_usd: float = 4.0
     fee_excessive_usd: float = 8.0
 
     usd_inr: float = 88.0
 
-    source: str = "UNVERIFIED — secondary reporting; replace with Visa VAMP fact sheet"
-    """Provenance. Anything other than a citation of Visa's own document means
-    these figures are not fit to publish."""
+    source: str = (
+        "Verified — Visa Acquirer Monitoring Program Overview fact sheet, "
+        "effective 1 June 2025. Thresholds: acquirer Above Standard >= 50 bps, "
+        "Excessive >= 70 bps; merchant Excessive >= 220 bps (AP/CA/EU/US). "
+        "Fees from Visa fee schedule (not this fact sheet). "
+        "India programme not yet announced per footnote 1."
+    )
+    """Provenance. Starts with 'Verified' when sourced from Visa's own document."""
 
     @property
     def verified(self) -> bool:

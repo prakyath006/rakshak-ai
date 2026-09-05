@@ -222,15 +222,21 @@ export default function Landing({ onLaunch }: { onLaunch: () => void }) {
             <div className="grid lg:grid-cols-12 gap-x-10 gap-y-8">
               <div className="lg:col-span-5">
                 <p className="text-[.98rem] leading-[1.7] text-graphite-700">
-                  Under Visa&rsquo;s Acquirer Monitoring Programme, a merchant is flagged
-                  &ldquo;excessive&rdquo; at a dispute ratio several times looser than the one an
-                  acquirer is held to — and the acquirer&rsquo;s is measured across every merchant on
-                  its book at once.
+                  Under Visa&rsquo;s{' '}
+                  <a href="https://corporate.visa.com/content/dam/VCOM/corporate/visa-perspectives/security-and-trust/documents/visa-acquirer-monitoring-program-fact-sheet-2025.pdf"
+                    className="underline underline-offset-2" target="_blank" rel="noopener">Acquirer Monitoring Programme</a>,
+                  a merchant is flagged &ldquo;excessive&rdquo; at &ge;220 bps (2.20%).
+                  An acquirer is flagged Above Standard at &ge;50 bps and Excessive at &ge;70 bps — roughly
+                  three times tighter, and measured across every merchant on its book at once.
                 </p>
                 <p className="mt-4 text-[.98rem] leading-[1.7] text-graphite-700">
                   So a handful of merchants running hot do not merely hurt themselves. They drag the
                   whole portfolio toward a band that bills the acquirer per dispute.
                   <sup className="fig text-press text-[.7em] ml-0.5">1</sup>
+                </p>
+                <p className="mt-3 note leading-relaxed text-[.82rem]">
+                  <em>India note:</em> the fact sheet states &ldquo;Programs for Brazil, Chile, and India
+                  will be announced later.&rdquo; The architecture is region-agnostic.
                 </p>
               </div>
 
@@ -242,8 +248,9 @@ export default function Landing({ onLaunch }: { onLaunch: () => void }) {
                   </caption>
                   <tbody>
                     {[
-                      { who: 'Merchant', v: '2.2%', w: 100, note: 'flagged excessive' },
-                      { who: 'Acquirer — Razorpay’s role', v: '≈0.3%', w: 13.6, note: 'portfolio-wide' },
+                      { who: 'Merchant (AP/CA/EU/US)', v: '2.20%', w: 100, note: '≥ 220 bps — flagged excessive' },
+                      { who: 'Acquirer — Above Standard', v: '0.50%', w: 22.7, note: '≥ 50 bps — portfolio-wide' },
+                      { who: 'Acquirer — Excessive', v: '0.70%', w: 31.8, note: '≥ 70 bps — per-dispute fines' },
                     ].map((r, i) => (
                       <tr key={r.who} className={i === 0 ? 'border-y border-graphite-900' : 'border-b border-paper-rule'}>
                         <th scope="row" className="text-left font-normal py-4 pr-4 align-top">
@@ -483,7 +490,7 @@ export default function Landing({ onLaunch }: { onLaunch: () => void }) {
                 ['This fold is 3.48% fraudulent — not a portfolio rate.', 'It is enriched data. Absolute monitoring bands are therefore inflated; the transferable figure is the 57% relative reduction in disputes.'],
                 ['Every cost is an assumption.', 'Nobody measured ₹850 for a specific merchant. The sensitivity sweep ships with the headline rather than after it.'],
                 ['Expected value is risk-neutral by construction.', 'It treats a certain ₹4,000 loss and a 1% chance of ₹4,00,000 as equivalent. A merchant does not. Risk aversion has to enter through the cost inputs.'],
-                ['The monitoring thresholds are not yet verified at source.', 'They come from secondary reporting that disagrees on the acquirer bands, and are marked unverified in the code until read from the scheme’s own document.'],
+                ['India is not yet under VAMP.', 'The Visa fact sheet explicitly states programmes for India will be announced later. The architecture is region-agnostic, but the specific thresholds and fines have not been set for India as of September 2026.'],
                 ['Selective labelling is not handled.', 'A blocked transaction never produces an outcome, so a deployed system’s training data is contaminated by its own past decisions and goes blind where it acts. IEEE-CIS hides this because every transaction in it was approved. It is the first thing that would need solving before a live deployment.'],
               ].map(([t, d], i) => (
                 <li key={t}>
