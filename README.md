@@ -224,45 +224,187 @@ tracking number, amount, date and citation, the verifier caught all four.
 
 ---
 
-## Running it
+## Architecture
 
-```bash
-# 1. data (needs a Kaggle account + accepting the competition rules)
-python -m kaggle competitions download -c ieee-fraud-detection -p data/ieee
-cd data/ieee && unzip -o ieee-fraud-detection.zip && cd ../..
-
-# 2. verify the label and the split before trusting anything
-python -m ml.inspect_data
-
-# 3. train, calibrate, evaluate
-python -m ml.train
-
-# 4. the money layer, sensitivity sweep, and VAMP projection
-python -m ml.evaluate_money
-
-# 5. export the scored fold the product serves
-python -m ml.export_decisions
-
-# 6. run it
-cd backend && uvicorn app.main:app --port 8000
-cd frontend && npm install && npm run dev
+```
+razorpay-buildathon/
+├── frontend/                  # Vite + React + TypeScript
+│   └── src/
+│       ├── Landing.tsx        # Marketing site (/) — VAMP thesis, proof, limitations
+│       ├── Root.tsx           # Hash router — / → Landing, /#/app → App
+│       ├── App.tsx            # App shell — 5 tabs, dispute workspace
+│       ├── api.ts             # All fetch calls, typed
+│       ├── types.ts           # Shared TypeScript types
+│       ├── format.ts          # Currency / number formatting
+│       ├── viz/palette.ts     # Validated colour system (contrast + CVD checks)
+│       └── components/
+│           ├── Header.tsx     # Running-head with system-mode badge
+│           ├── Wordmark.tsx   # Brand mark (not a shield)
+│           ├── ui.tsx         # Design system — Panel, Head, Stat, Tag, Rule
+│           ├── charts/Charts.tsx        # SVG charts: risk distribution, cost curve,
+│           │                            # PR curve, calibration, sensitivity strip
+│           ├── risk/
+│           │   ├── OverviewTab.tsx      # Portfolio hero, cost curve, segments
+│           │   ├── QueueTab.tsx         # 88,581 rows ranked by expected loss
+│           │   ├── PolicyTab.tsx        # Interactive cost-boundary explorer
+│           │   └── EvaluationTab.tsx    # PR curve, calibration, precision/recall table
+│           └── workspace/
+│               ├── CaseSummaryPanel.tsx
+│               ├── DecisionPanel.tsx
+│               ├── EvidenceGraphPanel.tsx
+│               ├── ExtractionPanel.tsx      # LLM correspondence reading
+│               ├── InvestigationSkeleton.tsx # Stage-by-stage loading state
+│               ├── RebuttalPanel.tsx
+│               ├── VerificationMatrixPanel.tsx
+│               ├── AuditTrailPanel.tsx
+│               └── ApprovalGatePanel.tsx    # Human approval gate
+│
+├── backend/                   # FastAPI
+│   └── app/
+│       ├── config.py          # Settings, loads .env explicitly
+│       ├── main.py            # 16 endpoints across /api/risk/*, /api/disputes/*, /api/webhooks/
+│       ├── agents/
+│       │   ├── decision_engine.py  # Deterministic rules — no model input
+│       │   ├── classifier.py       # Risk-score wrapper
+│       │   ├── extractor.py        # LLM correspondence reader + verbatim grounding
+│       │   ├── investigator.py     # Evidence graph assembly
+│       │   ├── pipeline.py         # Orchestrates extract → investigate → decide → draft
+│       │   ├── rebuttal.py         # LLM representment drafter + token-level verifier
+│       │   └── verifier.py         # Claim-level entailment check
+│       └── services/
+│           ├── llm.py              # OpenRouter client, retry/backoff, graceful fallback
+│           ├── razorpay_adapter.py # Disputes API, simulated/live mode, HMAC webhooks
+│           └── risk_store.py       # Serves scored transactions from ML artifacts
+│
+└── ml/                        # Training and evaluation pipeline
+    ├── data.py                # Chronological split with disjoint assertions
+    ├── features.py            # Entity resolution + encoders fitted on train only
+    ├── train.py               # LightGBM + isotonic calibration
+    ├── policy.py              # Cost model, expected-value policy, decision boundaries
+    ├── vamp.py                # Acquirer portfolio ratio, VAMP band classification
+    ├── money.py               # Realised cost, vectorised; baseline tuning
+    ├── evaluate_money.py      # Money table, sensitivity sweep, VAMP projection
+    ├── robustness.py          # Bootstrap CI, weekly stability, break-even, attribution
+    ├── export_decisions.py    # Writes artifacts/decisions.csv for the risk store
+    ├── export_charts.py       # Writes artifacts/charts.json for the frontend charts
+    ├── inspect_data.py        # Verifies label definition before training
+    ├── test_policy.py         # 27 tests — cost model, policy, VAMP
+    └── test_money.py          # 10 tests — realised cost, vectorisation parity
 ```
 
-Tests: `python -m pytest ml/ -q` (37 tests covering the cost model, the policy
-envelope, the VAMP arithmetic, and the rupee accounting).
+### Backend API endpoints
+
+| Method | Path | Purpose |
+|---|---|---|
+| GET | `/health` | Liveness |
+| GET | `/api/system/mode` | Razorpay mode (simulated/live) and LLM status |
+| GET | `/api/risk/summary` | Headline money figures for the dashboard |
+| GET | `/api/risk/queue` | Scored transactions, paginated, sortable |
+| GET | `/api/risk/segments` | Per-segment dispute rates and VAMP contribution |
+| GET | `/api/risk/evaluation` | PR-AUC, Brier, precision/recall table |
+| GET | `/api/risk/money` | Strategy comparison table |
+| GET | `/api/risk/charts` | Pre-computed chart data (distribution, cost curve, etc.) |
+| GET | `/api/risk/policy/defaults` | Default cost model parameters |
+| POST | `/api/risk/policy/simulate` | Recompute decision boundaries from posted costs |
+| GET | `/api/disputes` | List golden test cases |
+| GET | `/api/disputes/{id}` | Single case detail |
+| POST | `/api/disputes/{id}/investigate` | Run the full LLM pipeline |
+| POST | `/api/disputes/{id}/approve-and-submit` | Human-approved contest/accept to Razorpay |
+| POST | `/api/webhooks/razorpay` | HMAC-verified webhook ingestion |
+
+### Frontend — five tabs
+
+| Tab | What it shows |
+|---|---|
+| **Overview** | Hero risk distribution chart, cost curve, segment table, sensitivity sweep |
+| **Risk Queue** | All 88,581 scored transactions ranked by expected loss; filter by action band |
+| **Policy** | Drag cost sliders — decision boundaries recompute live in the browser |
+| **Evaluation** | PR curve, calibration scatter, precision/recall table, feature importance |
+| **Disputes** | 20-case regression harness; run full LLM investigation and approve representments |
+
+The landing page (`/`) is a separate document-style site — VAMP thesis, proof, methodology, and limitations — with the app behind "Launch system".
+
+---
+
+## Running it
+
+### Prerequisites
+
+```bash
+pip install lightgbm scikit-learn pandas numpy python-dotenv fastapi uvicorn httpx openai
+cd frontend && npm install
+```
+
+### First run — build the ML artifacts
+
+```bash
+# 1. Download data (Kaggle account + accept competition rules at kaggle.com)
+kaggle competitions download -c ieee-fraud-detection -p data/ieee
+cd data/ieee && unzip -o ieee-fraud-detection.zip && cd ../..
+
+# 2. Verify the label before trusting anything
+python -m ml.inspect_data
+
+# 3. Train, calibrate (≈10 min on full 590k rows)
+python -m ml.train
+
+# 4. Money evaluation, sensitivity sweep, VAMP projection
+python -m ml.evaluate_money
+
+# 5. Robustness: bootstrap CI, weekly stability, break-even, attribution
+python -m ml.robustness
+
+# 6. Export scored fold and chart data for the product
+python -m ml.export_decisions
+python -m ml.export_charts
+```
+
+### Start the app
+
+```bash
+# Terminal 1 — backend
+cd backend
+python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+
+# Terminal 2 — frontend
+cd frontend
+npm run dev
+# Open http://127.0.0.1:5173
+```
+
+### Refresh demo deadlines (before recording a demo)
+
+```bash
+python scripts/refresh_demo_deadlines.py
+# Spreads fixture deadlines across critical / high / normal tiers
+```
+
+### Tests
+
+```bash
+python -m pytest ml/ -q          # 37 tests — cost model, policy, VAMP, money
+python scripts/evaluate_golden_cases.py   # 20/20 regression harness
+python scripts/test_e2e_production.py     # 7 end-to-end scenarios
+```
+
+### Verify credentials
+
+```bash
+python scripts/test_razorpay_keys.py   # auth, disputes endpoint, creates a live order
+python scripts/test_llm_key.py --all   # auth + real completion, lists model slugs
+```
 
 ### Configuration
 
-Copy `.env.example` to `backend/.env`.
+Copy `.env.example` to `backend/.env`:
 
 | Variable | Purpose |
 |---|---|
 | `RAZORPAY_KEY_ID` / `_SECRET` | Test-mode credentials |
-| `RAZORPAY_MODE` | `auto` \| `simulated` \| `live`. Ships `simulated`: the test account has no bank-raised disputes, so live contest/accept would 404. Every simulated response is stamped `_simulated: true` and the UI shows an amber badge. |
-| `LLM_PROVIDER` / `LLM_MODEL` | `none` for the deterministic path, or `openrouter`. Ships with `minimax/minimax-m3:free`. |
-
-Verify credentials with `python scripts/test_razorpay_keys.py` and
-`python scripts/test_llm_key.py --all`.
+| `RAZORPAY_MODE` | `auto` \| `simulated` \| `live`. Ships `simulated` — the test account has no bank-raised disputes, so live contest/accept would 404. Every simulated response is stamped `_simulated: true` and the UI shows an amber badge. |
+| `LLM_PROVIDER` | `none` for the deterministic path, or `openrouter`. |
+| `LLM_MODEL` | Model slug on OpenRouter. Ships `minimax/minimax-m3:free`. Swap to a paid model (e.g. `anthropic/claude-sonnet-4-5`) for faster demo latency. |
+| `OPENROUTER_API_KEY` | Required when `LLM_PROVIDER=openrouter`. |
 
 ---
 
@@ -282,9 +424,11 @@ Stated here because "honest metrics" is a scored criterion, not a disclaimer.
    for a specific merchant. The sensitivity sweep is the mitigation and ships with
    the headline, not after it.
 4. **Expected value is risk-neutral by construction.** It treats "lose ₹4,000
-   certainly" and "lose ₹4,00,000 with probability 1%" as equivalent; a merchant does
+   certainly" and "lose ₹4,00,000 with probability 1%\" as equivalent; a merchant does
    not. Risk aversion has to be expressed through the cost inputs.
-5. **India is not yet under VAMP.** The fact sheet explicitly states programmes for India will be announced later. The architecture is region-agnostic, but the specific thresholds and fines have not been set for India as of September 2026.
+5. **India is not yet under VAMP.** The fact sheet explicitly states programmes for
+   India will be announced later. The architecture is region-agnostic, but the
+   specific thresholds and fines have not been set for India as of September 2026.
 6. **Selective labelling is not handled.** In production a blocked transaction
    never produces an outcome, so a deployed system's training data is contaminated
    by its own past decisions and goes blind exactly where it acts. Real teams use
@@ -295,6 +439,11 @@ Stated here because "honest metrics" is a scored criterion, not a disclaimer.
    hand-written regression harness that catches breakage, not a measurement. An
    earlier synthetic 1,000-case benchmark was retired from this README because it was
    partly circular: rules matched phrasing the generator produced.
+8. **LLM response latency is 8–15 seconds per investigation.** The free-tier model
+   (`minimax/minimax-m3:free`) makes two sequential round-trips. Swap `LLM_MODEL` to
+   a paid model for demo use. The deterministic path is unaffected (`LLM_PROVIDER=none`).
+
+---
 
 ## Defence-only
 
